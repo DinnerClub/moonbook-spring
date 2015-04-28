@@ -121,7 +121,8 @@ public class SqlFacetQueryString
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("SELECT ").append(fieldSb).append(aggregateSb).append(" FROM ").append(table).append(querySb).append(groupSb);
+			// query.append("SELECT ").append(fieldSb).append(aggregateSb).append(" FROM ").append(table).append(querySb).append(groupSb);
+			query.append(" ").append(fieldSb).append(aggregateSb).append(" FROM ").append(table).append(querySb).append(groupSb);
 
 			if (orderby != null && orderby.size() > 0)
 			{
@@ -160,8 +161,8 @@ public class SqlFacetQueryString
 		String offset = "0";
 		boolean facet = true;
 
-//		querys.put("year", 2015);
-//		querys.put("comment", "2222");
+		// querys.put("year", 2015);
+		// querys.put("comment", "2222");
 		fields.add("month");
 		fields.add("day");
 		fields.add("*");

@@ -24,32 +24,34 @@ public class UserPaymentDetail implements Serializable
 
 	protected long detailid; // bigint(20) NOT NULL COMMENT '账目id',
 	protected long userid; // bigint(20) DEFAULT NULL COMMENT '用户id',
-	protected int year; // int(2) DEFAULT NULL COMMENT '年',
-	protected int month; // int(1) DEFAULT NULL COMMENT '月',
-	protected int day; // int(1) DEFAULT NULL COMMENT '日',
-	protected int hour; // int(1) DEFAULT NULL COMMENT '时',
-	protected int minute; // int(1) DEFAULT NULL COMMENT '分',
-	protected int second; // int(1) DEFAULT NULL COMMENT '秒',
+	private int thedate; // int(4) DEFAULT NULL COMMENT '日期',
+	protected short year; // int(2) DEFAULT NULL COMMENT '年',
+	protected byte month; // int(1) DEFAULT NULL COMMENT '月',
+	protected byte day; // int(1) DEFAULT NULL COMMENT '日',
+	protected byte hour; // int(1) DEFAULT NULL COMMENT '时',
+	protected byte minute; // int(1) DEFAULT NULL COMMENT '分',
+	protected byte second; // int(1) DEFAULT NULL COMMENT '秒',
 	protected Date time; // timestamp NULL DEFAULT '0000-00-00 00:00:00' COMMENT
 							// '支出时间',
 	protected double latitude; // double DEFAULT NULL COMMENT '纬度坐标',
 	protected double longitude; // double DEFAULT NULL COMMENT '经度坐标',
 	protected String address; // varchar(255) DEFAULT NULL COMMENT '地址',
-	protected int pid; // int(2) DEFAULT NULL COMMENT '用途类目',
-	protected int cid; // int(2) DEFAULT NULL,
-	protected int mid; // int(2) DEFAULT NULL COMMENT '支出方式',
-	protected int sid; // int(2) DEFAULT NULL,
+	protected short pid; // int(2) DEFAULT NULL COMMENT '用途类目',
+	protected short cid; // int(2) DEFAULT NULL,
+	protected short mid; // int(2) DEFAULT NULL COMMENT '支出方式',
+	protected short sid; // int(2) DEFAULT NULL,
 	protected double money; // decimal(12,2) DEFAULT NULL COMMENT '支出金额',
 	protected String comment; // varchar(200) DEFAULT NULL COMMENT '备注',
 	protected double curlat; // double DEFAULT NULL COMMENT '当前纬度',
 	protected double curlon; // double DEFAULT NULL COMMENT '当前经度',
-	protected int syn; // int(2) DEFAULT '0' COMMENT '同步标识',
+	
+	protected short syn; // int(2) DEFAULT '0' COMMENT '同步标识',
 	protected Date created; // timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT
 							// '创建时间',
 	protected Date updated; // timestamp NULL DEFAULT '0000-00-00 00:00:00'
 							// COMMENT
 							// '更新时间',
-	protected int status; // int(2) DEFAULT '0' COMMENT '状态',
+	protected short status; // int(2) DEFAULT '0' COMMENT '状态',
 
 	public long getDetailid()
 	{
@@ -71,62 +73,72 @@ public class UserPaymentDetail implements Serializable
 		this.userid = userid;
 	}
 
-	public int getYear()
+	public int getThedate()
+	{
+		return thedate;
+	}
+
+	public void setThedate(int thedate)
+	{
+		this.thedate = thedate;
+	}
+
+	public short getYear()
 	{
 		return year;
 	}
 
-	public void setYear(int year)
+	public void setYear(short year)
 	{
 		this.year = year;
 	}
 
-	public int getMonth()
+	public byte getMonth()
 	{
 		return month;
 	}
 
-	public void setMonth(int month)
+	public void setMonth(byte month)
 	{
 		this.month = month;
 	}
 
-	public int getDay()
+	public byte getDay()
 	{
 		return day;
 	}
 
-	public void setDay(int day)
+	public void setDay(byte day)
 	{
 		this.day = day;
 	}
 
-	public int getHour()
+	public byte getHour()
 	{
 		return hour;
 	}
 
-	public void setHour(int hour)
+	public void setHour(byte hour)
 	{
 		this.hour = hour;
 	}
 
-	public int getMinute()
+	public byte getMinute()
 	{
 		return minute;
 	}
 
-	public void setMinute(int minute)
+	public void setMinute(byte minute)
 	{
 		this.minute = minute;
 	}
 
-	public int getSecond()
+	public byte getSecond()
 	{
 		return second;
 	}
 
-	public void setSecond(int second)
+	public void setSecond(byte second)
 	{
 		this.second = second;
 	}
@@ -171,42 +183,42 @@ public class UserPaymentDetail implements Serializable
 		this.address = address;
 	}
 
-	public int getPid()
+	public short getPid()
 	{
 		return pid;
 	}
 
-	public void setPid(int pid)
+	public void setPid(short pid)
 	{
 		this.pid = pid;
 	}
 
-	public int getCid()
+	public short getCid()
 	{
 		return cid;
 	}
 
-	public void setCid(int cid)
+	public void setCid(short cid)
 	{
 		this.cid = cid;
 	}
 
-	public int getMid()
+	public short getMid()
 	{
 		return mid;
 	}
 
-	public void setMid(int mid)
+	public void setMid(short mid)
 	{
 		this.mid = mid;
 	}
 
-	public int getSid()
+	public short getSid()
 	{
 		return sid;
 	}
 
-	public void setSid(int sid)
+	public void setSid(short sid)
 	{
 		this.sid = sid;
 	}
@@ -251,12 +263,12 @@ public class UserPaymentDetail implements Serializable
 		this.curlon = curlon;
 	}
 
-	public int getSyn()
+	public short getSyn()
 	{
 		return syn;
 	}
 
-	public void setSyn(int syn)
+	public void setSyn(short syn)
 	{
 		this.syn = syn;
 	}
@@ -281,12 +293,12 @@ public class UserPaymentDetail implements Serializable
 		this.updated = updated;
 	}
 
-	public int getStatus()
+	public short getStatus()
 	{
 		return status;
 	}
 
-	public void setStatus(int status)
+	public void setStatus(short status)
 	{
 		this.status = status;
 	}

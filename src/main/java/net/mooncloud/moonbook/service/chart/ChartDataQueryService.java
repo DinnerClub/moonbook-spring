@@ -12,13 +12,11 @@ import net.mooncloud.moonbook.entity.chart.ChartElement;
  *
  */
 
-public interface ChartDataQuery
+public interface ChartDataQueryService
 {
 	/**
 	 * 用户支出Facet查询
 	 * 
-	 * @param querys
-	 *            查询条件组合(AND)
 	 * @param fields
 	 *            维度组合
 	 * @param aggregates
@@ -27,6 +25,12 @@ public interface ChartDataQuery
 	 *            聚合字段
 	 * @param table
 	 *            表
+	 * @param querys
+	 *            查询条件组合(AND)
+	 * @param orderby
+	 *            排序字段
+	 * @param limit
+	 * @param offset
 	 */
 	public List<ChartElement> userPaymentFacetQuery(List<String> fields, List<String> aggregates, String index, String table, Map<String, Object> querys,
 			List<String> orderby, String limit, String offset);

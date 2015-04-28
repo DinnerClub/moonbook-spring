@@ -8,7 +8,7 @@
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT IGNORE INTO
 		`user_payment_detail`
-		(`detailid`, `userid`, `year`,
+		(`detailid`, `userid`, `thedate`, `year`,
 		`month`, `day`,
 		`hour`, `minute`,
 		`second`, `time`, `latitude`,
@@ -21,6 +21,7 @@
 		values (
 		#{detailid},
 		#{userid},
+		#{thedate},
 		#{year},
 		#{month},
 		#{day},
@@ -51,14 +52,13 @@
 		DELETE FROM
 		`user_payment_detail`
 		where
-		detailid=#{detailid}
+		detailid=#{0}
 	</delete>
 
-	<!-- 删除 -->
 	<update id="update" parameterType="UserPaymentDetail">
 		UPDATE
 		`user_payment_detail`
-		SET `userid`=#{userid},
+		SET `userid`=#{userid},`thedate`=#{thedate}, 
 		`year`=#{year}, `month`=#{month}, `day`=#{day},
 		`hour`=#{hour},
 		`minute`=#{minute}, `second`=#{second}, `time`=#{time},
