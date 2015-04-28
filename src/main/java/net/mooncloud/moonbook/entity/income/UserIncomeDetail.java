@@ -6,12 +6,15 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Date;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 用户收入账目详情列表
  * 
  * @author yangjd
  *
  */
+@Alias(value = "userIncomeDetail")
 public class UserIncomeDetail implements Serializable
 {
 	/**

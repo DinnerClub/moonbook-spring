@@ -11,7 +11,7 @@ import net.mooncloud.moonbook.entity.payment.UserPaymentDetail;
  * @author yangjd
  *
  */
-public interface UserPayment
+public interface UserPaymentDetailService
 {
 	public UserPaymentDetail save(UserPaymentDetail userPaymentDetail);
 

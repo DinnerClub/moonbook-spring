@@ -4,8 +4,11 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import org.apache.ibatis.type.Alias;
+
 import net.mooncloud.moonbook.entity.payment.UserPaymentDetail;
 
+@Alias(value = "chartElement")
 public class ChartElement extends UserPaymentDetail
 {
 

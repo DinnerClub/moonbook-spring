@@ -11,6 +11,7 @@ import net.mooncloud.moonbook.entity.chart.ChartElement;
  * @author yangjd
  *
  */
+
 public interface ChartDataQuery
 {
 	/**
@@ -27,5 +28,6 @@ public interface ChartDataQuery
 	 * @param table
 	 *            表
 	 */
-	public List<ChartElement> userPaymentFacetQuery(Map<String, Object> querys, List<String> fields, List<String> aggregates, String index, String table);
+	public List<ChartElement> userPaymentFacetQuery(List<String> fields, List<String> aggregates, String index, String table, Map<String, Object> querys,
+			List<String> orderby, String limit, String offset);
 }

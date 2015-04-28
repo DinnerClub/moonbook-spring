@@ -1,13 +1,12 @@
 package net.mooncloud.moonbook.service.payment.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import net.mooncloud.moonbook.entity.payment.UserPaymentDetail;
 import net.mooncloud.moonbook.service.chart.impl.SqlFacetQueryString;
-import net.mooncloud.moonbook.service.payment.UserPayment;
+import net.mooncloud.moonbook.service.payment.UserPaymentDetailService;
 
 /**
  * 用户支出
@@ -15,7 +14,7 @@ import net.mooncloud.moonbook.service.payment.UserPayment;
  * @author yangjd
  *
  */
-public class UserPaymentImpl implements UserPayment
+public class UserPaymentDetailServiceImpl implements UserPaymentDetailService
 {
 
 	public UserPaymentDetail save(UserPaymentDetail userPaymentDetail)
@@ -43,7 +42,7 @@ public class UserPaymentImpl implements UserPayment
 
 		fields.add("*");
 		table = "user_payment_detail";
-		String facetQueryString = SqlFacetQueryString.facetQueryString(querys, fields, null, null, table, true);
+		String facetQueryString = SqlFacetQueryString.facetQueryString(fields, null, null, table, querys, null, null, null, true);
 		return null;
 	}
 }

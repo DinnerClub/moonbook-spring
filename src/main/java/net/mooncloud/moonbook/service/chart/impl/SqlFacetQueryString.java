@@ -43,7 +43,8 @@ public class SqlFacetQueryString
 	 * @param facet
 	 * @return
 	 */
-	public static String facetQueryString(Map<String, Object> querys, List<String> fields, List<String> aggregates, String index, String table, boolean facet)
+	public static String facetQueryString(List<String> fields, List<String> aggregates, String index, String table, Map<String, Object> querys,
+			List<String> orderby, String limit, String offset, boolean facet)
 	{
 		// SELECT month, day, SUM(money) AS SUM, COUNT(money) AS COUNT FROM
 		// user_payment_detail WHERE year=2015 AND comment="2222" GROUP BY
@@ -58,9 +59,9 @@ public class SqlFacetQueryString
 			if (fields != null && fields.size() > 0)
 			{
 				fieldSb.append(fields.get(0));
-				fields.remove(0);
-				for (String field : fields)
+				for (int i = 1; i < orderby.size(); i++)
 				{
+					String field = fields.get(i);
 					fieldSb.append(", ").append(field);
 				}
 				if (aggregates != null && aggregates.size() > 0)
@@ -118,36 +119,61 @@ public class SqlFacetQueryString
 				}
 			}// query
 
-			StringBuilder sqlSb = new StringBuilder();
+			StringBuilder query = new StringBuilder();
 
-			sqlSb.append("SELECT ").append(fieldSb).append(aggregateSb).append(" FROM ").append(table).append(querySb).append(groupSb);
-			return sqlSb.toString();
+			query.append("SELECT ").append(fieldSb).append(aggregateSb).append(" FROM ").append(table).append(querySb).append(groupSb);
+
+			if (orderby != null && orderby.size() > 0)
+			{
+				query.append(" ORDER BY ");
+				query.append(orderby.get(0));
+				for (int i = 1; i < orderby.size(); i++)
+				{
+					String order = orderby.get(i);
+					query.append(", ").append(order);
+				}
+			}
+
+			if (limit != null && limit.length() > 0)
+			{
+				query.append(" LIMIT ").append(limit);
+				if (offset != null && offset.length() > 0)
+				{
+					query.append(" OFFSET ").append(offset);
+				}
+			}
+
+			return query.toString();
 		}
 		return null;
 	}
 
 	public static void main(String[] args)
 	{
-		SqlFacetQueryString query = new SqlFacetQueryString();
-		Map<String, Object> querys = new HashMap<String, Object>();
 		List<String> fields = new ArrayList<String>();
 		List<String> aggregates = new ArrayList<String>();
 		String index = null;
 		String table = null;
+		Map<String, Object> querys = new HashMap<String, Object>();
+		List<String> orderby = new ArrayList<String>();
+		String limit = "1";
+		String offset = "0";
 		boolean facet = true;
 
-		querys.put("year", 2015);
-		querys.put("comment", "2222");
-//		fields.add("month");
-//		fields.add("day");
+//		querys.put("year", 2015);
+//		querys.put("comment", "2222");
+		fields.add("month");
+		fields.add("day");
 		fields.add("*");
-//		aggregates.add("SUM");
-//		aggregates.add("COUNT");
+		aggregates.add("SUM");
+		aggregates.add("COUNT");
+		orderby.add("SUM DESC");
+		orderby.add("COUNT ASC");
 		index = "money";
 		table = "user_payment_detail";
 		// SomeStaticUtils.
-		String facetQueryString = query.facetQueryString(querys, fields, aggregates, index, table, facet);
-		
+		String facetQueryString = SqlFacetQueryString.facetQueryString(fields, aggregates, index, table, querys, orderby, limit, offset, facet);
+
 		System.out.println(facetQueryString);
 	}
 }

@@ -17,7 +17,8 @@ public class ChartDataQueryImpl implements ChartDataQuery
 	static Connection connection = null;
 	static Statement statement = null;
 
-	public List<ChartElement> userPaymentFacetQuery(Map<String, Object> querys, List<String> fields, List<String> aggregates, String index, String table)
+	public List<ChartElement> userPaymentFacetQuery(List<String> fields, List<String> aggregates, String index, String table, Map<String, Object> querys,
+			List<String> orderby, String limit, String offset)
 	{
 		try
 		{
@@ -28,11 +29,11 @@ public class ChartDataQueryImpl implements ChartDataQuery
 			// statement.addBatch(SqlFacetQueryString.facetQueryString(querys,
 			// fields, aggregates, index, table, true));
 
-			String facetQueryString = SqlFacetQueryString.facetQueryString(querys, fields, aggregates, index, table, true);
+			String facetQueryString = SqlFacetQueryString.facetQueryString(fields, aggregates, index, table, querys, orderby, limit, offset, true);
 			ResultSet resultSet = statement.executeQuery(facetQueryString);
-			while(resultSet.next())
+			while (resultSet.next())
 			{
-//				resultSet.get
+				// resultSet.get
 			}
 			statement.executeBatch();
 			connection.commit();
