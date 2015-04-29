@@ -5,13 +5,13 @@
 <mapper
 	namespace="net.mooncloud.moonbook.repository.payment.UserPaymentDailySubtotalDao">
 
-	<insert id="save" parameterType="UserPaymentDailySubtotal"
+	<insert id="insertUpdate" parameterType="UserPaymentDailySubtotal"
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO
 		`user_payment_daily_subtotal`
 		(`userid`, `thedate`, `year`,
 		`month`,
-		`day`, `money`,
+		`date`, `money`,
 		`syn`, `created`,
 		`updated`, `status`)
 		VALUES (
@@ -19,7 +19,7 @@
 		#{thedate},
 		#{year},
 		#{month},
-		#{day},
+		#{date},
 		#{money},
 		#{syn},
 		#{created},
@@ -28,16 +28,16 @@
 		)
 		ON DUPLICATE KEY
 		UPDATE
-		year=VALUES(year),month=VALUES(month),day=VALUES(day),money=VALUES(money),syn=VALUES(syn),updated=VALUES(updated),status=VALUES(status)
+		year=VALUES(year),month=VALUES(month),date=VALUES(date),money=VALUES(money),syn=VALUES(syn),updated=VALUES(updated),status=VALUES(status)
 	</insert>
 
-	<insert id="incrementalSave" parameterType="UserPaymentDailySubtotal"
+	<insert id="insertIgnore" parameterType="UserPaymentDailySubtotal"
 		useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO
+		INSERT IGNORE INTO
 		`user_payment_daily_subtotal`
 		(`userid`, `thedate`, `year`,
 		`month`,
-		`day`, `money`,
+		`date`, `money`,
 		`syn`, `created`,
 		`updated`, `status`)
 		VALUES (
@@ -45,7 +45,30 @@
 		#{thedate},
 		#{year},
 		#{month},
-		#{day},
+		#{date},
+		#{money},
+		#{syn},
+		#{created},
+		#{updated},
+		#{status}
+		)
+	</insert>
+
+	<insert id="incrementalUpdateMoney" parameterType="UserPaymentDailySubtotal"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+		`user_payment_daily_subtotal`
+		(`userid`, `thedate`, `year`,
+		`month`,
+		`date`, `money`,
+		`syn`, `created`,
+		`updated`, `status`)
+		VALUES (
+		#{userid},
+		#{thedate},
+		#{year},
+		#{month},
+		#{date},
 		#{money},
 		#{syn},
 		#{created},
@@ -61,14 +84,14 @@
 	<delete id="delete" parameterType="Long">
 		DELETE FROM
 		`user_payment_daily_subtotal`
-		where userid=#{0} AND thedate=#{1}
+		WHERE userid=#{0} AND thedate=#{1}
 	</delete>
 
 	<update id="update" parameterType="UserPaymentDailySubtotal">
 		UPDATE
 		`user_payment_daily_subtotal`
 		SET `year`=#{year}, `month`=#{month},
-		`day`=#{day},
+		`date`=#{date},
 		`money`=#{money}, `syn`=#{syn},
 		`updated`=#{updated},
 		`status`=#{status} WHERE

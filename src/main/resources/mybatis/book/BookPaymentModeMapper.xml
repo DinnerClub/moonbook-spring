@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="net.mooncloud.moonbook.repository.book.BookPaymentModeDao">
+
+	<insert id="insertIgnore" parameterType="BookPaymentMode"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT IGNORE INTO
+		`book_payment_mode`
+		(`mid`, `mname`, `sid`, `sname`,
+		`syn`, `created`,
+		`updated`, `status`)
+		VALUES (
+		#{mid},
+		#{mname},
+		#{sid},
+		#{sname},
+		#{syn},
+		#{created},
+		#{updated},
+		#{status}
+		)
+	</insert>
+
+	<insert id="insertUpdate" parameterType="BookPaymentMode"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT IGNORE INTO
+		`book_payment_mode`
+		(`mid`, `mname`, `sid`, `sname`,
+		`syn`,
+		`created`,
+		`updated`, `status`)
+		VALUES (
+		#{mid},
+		#{mname},
+		#{sid},
+		#{sname},
+		#{syn},
+		#{created},
+		#{updated},
+		#{status}
+		)
+		ON DUPLICATE
+		KEY
+		UPDATE
+		mname=VALUES(mname),sname=VALUES(sname),syn=VALUES(syn),updated=VALUES(updated),status=VALUES(status)
+	</insert>
+
+	<!-- 删除 -->
+	<delete id="deleteMid">
+		DELETE FROM
+		`book_payment_mode`
+		WHERE
+		mid=#{0}
+	</delete>
+
+	<!-- 删除 -->
+	<delete id="delete">
+		DELETE FROM
+		`book_payment_mode`
+		WHERE
+		mid=#{0} AND
+		`sid`=#{1}
+	</delete>
+
+	<update id="update" parameterType="BookPaymentMode">
+		UPDATE
+		`book_payment_mode`
+		SET `mid`=#{mid}, `mname`=#{mname},
+		<if test="sid>0">
+			`sid`=#{sid}, `sname`=#{sname},
+		</if>
+		`syn`=#{syn}, `updated`=#{updated}, `status`=#{status}
+		WHERE
+		`mid`=#{mid}
+		<if test="sid>0">
+			AND `sid`=#{sid}
+		</if>
+	</update>
+</mapper> 

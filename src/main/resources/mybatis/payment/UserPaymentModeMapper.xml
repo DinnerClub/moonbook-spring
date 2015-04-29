@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="net.mooncloud.moonbook.repository.payment.UserPaymentModeDao">
+
+	<insert id="insertIgnore" parameterType="UserPaymentMode"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT IGNORE INTO
+		`user_payment_mode`
+		(`userid`, `mid`, `mname`, `sid`, `sname`,`count`,
+		`syn`, `created`,
+		`updated`, `status`)
+		VALUES (
+		#{userid},
+		#{mid},
+		#{mname},
+		#{sid},
+		#{sname},
+		#{count},
+		#{syn},
+		#{created},
+		#{updated},
+		#{status}
+		)
+	</insert>
+
+	<insert id="insertUpdate" parameterType="UserPaymentMode"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT IGNORE INTO
+		`user_payment_mode`
+		(`userid`, `mid`, `mname`, `sid`, `sname`,`count`,
+		`syn`,
+		`created`,
+		`updated`, `status`)
+		VALUES (
+		#{userid},
+		#{mid},
+		#{mname},
+		#{sid},
+		#{sname},
+		#{count},
+		#{syn},
+		#{created},
+		#{updated},
+		#{status}
+		)
+		ON DUPLICATE
+		KEY
+		UPDATE
+		mname=VALUES(mname),sname=VALUES(sname),syn=VALUES(syn),updated=VALUES(updated),status=VALUES(status)
+	</insert>
+
+	<insert id="incrementalUpdateCount" parameterType="UserPaymentMode"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT IGNORE INTO
+		`user_payment_category`
+		(`userid`, `mid`, `mname`, `sid`, `sname`,
+		`count`,
+		`syn`, `created`, `updated`, `status`)
+		VALUES (
+		#{userid},
+		#{mid},
+		#{mname},
+		#{sid},
+		#{sname},
+		#{count},
+		#{syn},
+		#{created},
+		#{updated},
+		#{status}
+		)
+		ON DUPLICATE
+		KEY
+		UPDATE
+		count=count+VALUES(count),syn=VALUES(syn),updated=VALUES(updated)
+	</insert>
+
+	<!-- 删除 -->
+	<delete id="deleteMid">
+		DELETE FROM
+		`user_payment_mode`
+		WHERE
+		`userid`=#{0}
+		AND
+		mid=#{1}
+	</delete>
+
+	<!-- 删除 -->
+	<delete id="delete">
+		DELETE FROM
+		`user_payment_mode`
+		WHERE
+		`userid`=#{0}
+		AND
+		mid=#{1} AND
+		`sid`=#{2}
+	</delete>
+
+	<update id="update" parameterType="UserPaymentMode">
+		UPDATE
+		`user_payment_mode`
+		SET `mid`=#{mid}, `mname`=#{mname},
+		<if test="sid>0">
+			`sid`=#{sid}, `sname`=#{sname},
+		</if>
+		`syn`=#{syn}, `updated`=#{updated}, `status`=#{status}
+		WHERE
+		`userid`=#{userid}
+		AND
+		`mid`=#{mid}
+		<if test="sid>0">
+			AND `sid`=#{sid}
+		</if>
+	</update>
+</mapper> 

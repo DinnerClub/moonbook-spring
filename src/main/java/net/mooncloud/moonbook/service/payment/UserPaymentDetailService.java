@@ -17,7 +17,5 @@ public interface UserPaymentDetailService
 
 	public UserPaymentDetail delete(UserPaymentDetail userPaymentDetail);
 
-	public UserPaymentDetail update(UserPaymentDetail userPaymentDetail);
-
 	public List<UserPaymentDetail> search(Map<String, Object> querys);
 }

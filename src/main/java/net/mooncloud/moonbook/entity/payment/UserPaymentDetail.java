@@ -27,7 +27,8 @@ public class UserPaymentDetail implements Serializable
 	private int thedate; // int(4) DEFAULT NULL COMMENT '日期',
 	protected short year; // int(2) DEFAULT NULL COMMENT '年',
 	protected byte month; // int(1) DEFAULT NULL COMMENT '月',
-	protected byte day; // int(1) DEFAULT NULL COMMENT '日',
+	protected byte date; // int(1) DEFAULT NULL COMMENT '日',
+	protected byte day; // int(1) DEFAULT NULL COMMENT '星期',
 	protected byte hour; // int(1) DEFAULT NULL COMMENT '时',
 	protected byte minute; // int(1) DEFAULT NULL COMMENT '分',
 	protected byte second; // int(1) DEFAULT NULL COMMENT '秒',
@@ -101,6 +102,16 @@ public class UserPaymentDetail implements Serializable
 	public void setMonth(byte month)
 	{
 		this.month = month;
+	}
+
+	public byte getDate()
+	{
+		return date;
+	}
+
+	public void setDate(byte date)
+	{
+		this.date = date;
 	}
 
 	public byte getDay()

@@ -8,87 +8,93 @@ import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias(value = "mbPaymentCategory")
-public class MbPaymentCategory implements Serializable
+/**
+ * 节假日
+ * 
+ * @author yangjd
+ *
+ */
+@Alias(value = "bookFestival")
+public class BookFestival implements Serializable
 {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private long userid; // bigint(20) NOT NULL COMMENT '用户id',
-	private short pid; // int(2) NOT NULL COMMENT '父类目id',
-	private String pname; // varchar(32) DEFAULT NULL COMMENT '父类目',
-	private short cid; // int(2) NOT NULL COMMENT '子类目id',
-	private String cname; // varchar(32) DEFAULT NULL COMMENT '子类目',
-	private long count; // bigint(20) DEFAULT '0' COMMENT ' 使用次数',
+	protected int thedate; // int(4) DEFAULT NULL COMMENT '日期yyyymmdd',
+	protected short year; // int(2) DEFAULT NULL COMMENT '年',
+	protected byte month; // int(1) DEFAULT NULL COMMENT '月',
+	protected byte date; // int(1) DEFAULT NULL COMMENT '日',
+	protected String festival; // varchar(32) DEFAULT NULL COMMENT '节日',
+	protected byte lunar; // int(1) DEFAULT NULL COMMENT '农历或阳历:0-阳历;1-农历;其他',
 
-	private short syn; // int(2) DEFAULT '0' COMMENT '同步标识',
-	private Date created; // timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT
+	protected short syn; // int(2) DEFAULT '0' COMMENT '同步标识',
+	protected Date created; // timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT
 							// '创建时间',
-	private Date updated; // timestamp NULL DEFAULT '0000-00-00 00:00:00'
+	protected Date updated; // timestamp NULL DEFAULT '0000-00-00 00:00:00'
 							// COMMENT
 							// '更新时间',
-	private short status; // int(2) DEFAULT '0' COMMENT '状态',
+	protected short status; // int(2) DEFAULT '0' COMMENT '状态',
 
-	public long getUserid()
+	public int getThedate()
 	{
-		return userid;
+		return thedate;
 	}
 
-	public void setUserid(long userid)
+	public void setThedate(int thedate)
 	{
-		this.userid = userid;
+		this.thedate = thedate;
 	}
 
-	public short getPid()
+	public short getYear()
 	{
-		return pid;
+		return year;
 	}
 
-	public void setPid(short pid)
+	public void setYear(short year)
 	{
-		this.pid = pid;
+		this.year = year;
 	}
 
-	public String getPname()
+	public byte getMonth()
 	{
-		return pname;
+		return month;
 	}
 
-	public void setPname(String pname)
+	public void setMonth(byte month)
 	{
-		this.pname = pname;
+		this.month = month;
 	}
 
-	public short getCid()
+	public byte getDate()
 	{
-		return cid;
+		return date;
 	}
 
-	public void setCid(short cid)
+	public void setDate(byte date)
 	{
-		this.cid = cid;
+		this.date = date;
 	}
 
-	public String getCname()
+	public String getFestival()
 	{
-		return cname;
+		return festival;
 	}
 
-	public void setCname(String cname)
+	public void setFestival(String festival)
 	{
-		this.cname = cname;
+		this.festival = festival;
 	}
 
-	public long getCount()
+	public byte getLunar()
 	{
-		return count;
+		return lunar;
 	}
 
-	public void setCount(long count)
+	public void setLunar(byte lunar)
 	{
-		this.count = count;
+		this.lunar = lunar;
 	}
 
 	public short getSyn()
@@ -154,4 +160,5 @@ public class MbPaymentCategory implements Serializable
 		sb.append("]");
 		return sb.toString();
 	}
+
 }

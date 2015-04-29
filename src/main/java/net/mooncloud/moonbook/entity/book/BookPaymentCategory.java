@@ -8,19 +8,18 @@ import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias(value = "mbPaymentMode")
-public class MbPaymentMode implements Serializable
+@Alias(value = "bookPaymentCategory")
+public class BookPaymentCategory implements Serializable
 {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private long userid; // bigint(20) NOT NULL COMMENT '用户id',
-	private short mid; // int(2) NOT NULL COMMENT '支付方式id',
-	private String mname; // varchar(32) DEFAULT NULL COMMENT '支付方式',
-	private short sid; // int(2) NOT NULL COMMENT '资金源id',
-	private String sname; // varchar(32) DEFAULT NULL COMMENT '资金源',
+	private short pid; // int(2) NOT NULL COMMENT '父类目id',
+	private String pname; // varchar(32) DEFAULT NULL COMMENT '父类目',
+	private short cid; // int(2) NOT NULL COMMENT '子类目id',
+	private String cname; // varchar(32) DEFAULT NULL COMMENT '子类目',
 	private long count; // bigint(20) DEFAULT '0' COMMENT ' 使用次数',
 
 	private short syn; // int(2) DEFAULT '0' COMMENT '同步标识',
@@ -31,54 +30,44 @@ public class MbPaymentMode implements Serializable
 							// '更新时间',
 	private short status; // int(2) DEFAULT '0' COMMENT '状态',
 
-	public long getUserid()
+	public short getPid()
 	{
-		return userid;
+		return pid;
 	}
 
-	public void setUserid(long userid)
+	public void setPid(short pid)
 	{
-		this.userid = userid;
+		this.pid = pid;
 	}
 
-	public short getMid()
+	public String getPname()
 	{
-		return mid;
+		return pname;
 	}
 
-	public void setMid(short mid)
+	public void setPname(String pname)
 	{
-		this.mid = mid;
+		this.pname = pname;
 	}
 
-	public String getMname()
+	public short getCid()
 	{
-		return mname;
+		return cid;
 	}
 
-	public void setMname(String mname)
+	public void setCid(short cid)
 	{
-		this.mname = mname;
+		this.cid = cid;
 	}
 
-	public short getSid()
+	public String getCname()
 	{
-		return sid;
+		return cname;
 	}
 
-	public void setSid(short sid)
+	public void setCname(String cname)
 	{
-		this.sid = sid;
-	}
-
-	public String getSname()
-	{
-		return sname;
-	}
-
-	public void setSname(String sname)
-	{
-		this.sname = sname;
+		this.cname = cname;
 	}
 
 	public long getCount()

@@ -8,93 +8,76 @@ import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
 
-/**
- * 节假日
- * 
- * @author yangjd
- *
- */
-@Alias(value = "mbFestival")
-public class MbFestival implements Serializable
+@Alias(value = "bookPaymentMode")
+public class BookPaymentMode implements Serializable
 {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	protected int thedate; // int(4) DEFAULT NULL COMMENT '日期yyyymmdd',
-	protected short year; // int(2) DEFAULT NULL COMMENT '年',
-	protected byte month; // int(1) DEFAULT NULL COMMENT '月',
-	protected byte day; // int(1) DEFAULT NULL COMMENT '日',
-	protected String festival; // varchar(32) DEFAULT NULL COMMENT '节日',
-	protected byte lunar; // int(1) DEFAULT NULL COMMENT '农历或阳历:0-阳历;1-农历;其他',
+	private short mid; // int(2) NOT NULL COMMENT '支付方式id',
+	private String mname; // varchar(32) DEFAULT NULL COMMENT '支付方式',
+	private short sid; // int(2) NOT NULL COMMENT '资金源id',
+	private String sname; // varchar(32) DEFAULT NULL COMMENT '资金源',
+	private long count; // bigint(20) DEFAULT '0' COMMENT ' 使用次数',
 
-	protected short syn; // int(2) DEFAULT '0' COMMENT '同步标识',
-	protected Date created; // timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT
+	private short syn; // int(2) DEFAULT '0' COMMENT '同步标识',
+	private Date created; // timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT
 							// '创建时间',
-	protected Date updated; // timestamp NULL DEFAULT '0000-00-00 00:00:00'
+	private Date updated; // timestamp NULL DEFAULT '0000-00-00 00:00:00'
 							// COMMENT
 							// '更新时间',
-	protected short status; // int(2) DEFAULT '0' COMMENT '状态',
+	private short status; // int(2) DEFAULT '0' COMMENT '状态',
 
-	public int getThedate()
+	public short getMid()
 	{
-		return thedate;
+		return mid;
 	}
 
-	public void setThedate(int thedate)
+	public void setMid(short mid)
 	{
-		this.thedate = thedate;
+		this.mid = mid;
 	}
 
-	public short getYear()
+	public String getMname()
 	{
-		return year;
+		return mname;
 	}
 
-	public void setYear(short year)
+	public void setMname(String mname)
 	{
-		this.year = year;
+		this.mname = mname;
 	}
 
-	public byte getMonth()
+	public short getSid()
 	{
-		return month;
+		return sid;
 	}
 
-	public void setMonth(byte month)
+	public void setSid(short sid)
 	{
-		this.month = month;
+		this.sid = sid;
 	}
 
-	public byte getDay()
+	public String getSname()
 	{
-		return day;
+		return sname;
 	}
 
-	public void setDay(byte day)
+	public void setSname(String sname)
 	{
-		this.day = day;
+		this.sname = sname;
 	}
 
-	public String getFestival()
+	public long getCount()
 	{
-		return festival;
+		return count;
 	}
 
-	public void setFestival(String festival)
+	public void setCount(long count)
 	{
-		this.festival = festival;
-	}
-
-	public byte getLunar()
-	{
-		return lunar;
-	}
-
-	public void setLunar(byte lunar)
-	{
-		this.lunar = lunar;
+		this.count = count;
 	}
 
 	public short getSyn()
@@ -160,5 +143,4 @@ public class MbFestival implements Serializable
 		sb.append("]");
 		return sb.toString();
 	}
-
 }

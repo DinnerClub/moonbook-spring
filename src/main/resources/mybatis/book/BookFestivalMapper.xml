@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="net.mooncloud.moonbook.repository.book.BookFestivalDao">
+
+	<insert id="insertIgnore" parameterType="BookFestival"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT IGNORE INTO
+		`book_festival`
+		(`thedate`, `year`, `month`, `date`, `festival`, `lunar`,
+		`syn`,
+		`created`, `updated`, `status`)
+		VALUES (
+		#{thedate},
+		#{year},
+		#{month},
+		#{date},
+		#{festival},
+		#{lunar},
+		#{syn},
+		#{created},
+		#{updated},
+		#{status}
+		)
+	</insert>
+
+	<insert id="insertUpdate" parameterType="BookFestival"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT IGNORE INTO
+		`book_festival`
+		(`thedate`, `year`, `month`, `date`, `festival`, `lunar`,
+		`syn`,
+		`created`, `updated`, `status`)
+		VALUES (
+		#{thedate},
+		#{year},
+		#{month},
+		#{date},
+		#{festival},
+		#{lunar},
+		#{syn},
+		#{created},
+		#{updated},
+		#{status}
+		)
+		ON DUPLICATE
+		KEY
+		UPDATE
+		year=VALUES(year),month=VALUES(month),date=VALUES(date),festival=VALUES(festival),syn=VALUES(syn),updated=VALUES(updated),status=VALUES(status)
+	</insert>
+
+	<!-- 删除 -->
+	<delete id="deleteDate">
+		DELETE FROM
+		`book_festival`
+		WHERE
+		thedate=#{0}
+	</delete>
+
+	<!-- 删除 -->
+	<delete id="delete">
+		DELETE FROM
+		`book_festival`
+		WHERE
+		thedate=#{0} AND
+		`lunar`=#{1}
+	</delete>
+
+	<update id="update" parameterType="BookFestival">
+		UPDATE
+		`book_festival`
+		SET
+		`year`=#{year}, `month`=#{month},
+		`date`=#{date},
+		`festival`=#{festival},
+		`syn`=#{syn}, `updated`=#{updated},
+		`status`=#{status}
+		WHERE
+		`thedate`=#{thedate}
+		AND `lunar`=#{lunar}
+	</update>
+</mapper> 

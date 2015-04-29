@@ -1,4 +1,4 @@
-package net.mooncloud.moonbook.entity.payment;
+package net.mooncloud.moonbook.entity.book;
 
 import java.beans.PropertyDescriptor;
 import java.io.Serializable;
@@ -8,87 +8,76 @@ import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias(value = "userPaymentDailySubtotal")
-public class UserPaymentDailySubtotal implements Serializable
+@Alias(value = "bookIncomeMode")
+public class BookIncomeMode implements Serializable
 {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	protected long userid; // bigint(20) DEFAULT NULL COMMENT '用户id',
-	protected int thedate; // int(4) DEFAULT NULL COMMENT '日期yyyymmdd',
-	protected short year; // int(2) DEFAULT NULL COMMENT '年',
-	protected byte month; // int(1) DEFAULT NULL COMMENT '月',
-	protected byte date; // int(1) DEFAULT NULL COMMENT '日',
-	protected double money; // decimal(12,2) DEFAULT NULL COMMENT '支出金额',
+	private short mid; // int(2) NOT NULL COMMENT '收入方式id',
+	private String mname; // varchar(32) DEFAULT NULL COMMENT '收入方式',
+	private short sid; // int(2) NOT NULL COMMENT '资金源id',
+	private String sname; // varchar(32) DEFAULT NULL COMMENT '资金源',
+	private long count; // bigint(20) DEFAULT '0' COMMENT ' 使用次数',
 
-	protected short syn; // int(2) DEFAULT '0' COMMENT '同步标识',
-	protected Date created; // timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT
+	private short syn; // int(2) DEFAULT '0' COMMENT '同步标识',
+	private Date created; // timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT
 							// '创建时间',
-	protected Date updated; // timestamp NULL DEFAULT '0000-00-00 00:00:00'
+	private Date updated; // timestamp NULL DEFAULT '0000-00-00 00:00:00'
 							// COMMENT
 							// '更新时间',
-	protected short status; // int(2) DEFAULT '0' COMMENT '状态',
+	private short status; // int(2) DEFAULT '0' COMMENT '状态',
 
-	public long getUserid()
+	public short getMid()
 	{
-		return userid;
+		return mid;
 	}
 
-	public void setUserid(long userid)
+	public void setMid(short mid)
 	{
-		this.userid = userid;
+		this.mid = mid;
 	}
 
-	public int getThedate()
+	public String getMname()
 	{
-		return thedate;
+		return mname;
 	}
 
-	public void setThedate(int thedate)
+	public void setMname(String mname)
 	{
-		this.thedate = thedate;
+		this.mname = mname;
 	}
 
-	public short getYear()
+	public short getSid()
 	{
-		return year;
+		return sid;
 	}
 
-	public void setYear(short year)
+	public void setSid(short sid)
 	{
-		this.year = year;
+		this.sid = sid;
 	}
 
-	public byte getMonth()
+	public String getSname()
 	{
-		return month;
+		return sname;
 	}
 
-	public void setMonth(byte month)
+	public void setSname(String sname)
 	{
-		this.month = month;
+		this.sname = sname;
 	}
 
-	public byte getDate()
+	public long getCount()
 	{
-		return date;
+		return count;
 	}
 
-	public void setDate(byte date)
+	public void setCount(long count)
 	{
-		this.date = date;
-	}
-
-	public double getMoney()
-	{
-		return money;
-	}
-
-	public void setMoney(double money)
-	{
-		this.money = money;
+		this.count = count;
 	}
 
 	public short getSyn()

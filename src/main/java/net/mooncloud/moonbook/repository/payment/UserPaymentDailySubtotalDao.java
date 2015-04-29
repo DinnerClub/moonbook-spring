@@ -7,9 +7,11 @@ import net.mooncloud.moonbook.entity.payment.UserPaymentDailySubtotal;
 
 public interface UserPaymentDailySubtotalDao
 {
-	public void save(UserPaymentDailySubtotal userPaymentDailySubtotal);
+	public void insertUpdate(UserPaymentDailySubtotal userPaymentDailySubtotal);
 
-	public void incrementalSave(UserPaymentDailySubtotal userPaymentDailySubtotal);
+	public void insertIgnore(UserPaymentDailySubtotal userPaymentDailySubtotal);
+
+	public void incrementalUpdateMoney(UserPaymentDailySubtotal userPaymentDailySubtotal);
 
 	public void delete(Long userid, Long thedate);
 

@@ -27,7 +27,8 @@ public class UserIncomeDetail implements Serializable
 	private int thedate; // int(4) DEFAULT NULL COMMENT '日期',
 	private short year; // int(2) DEFAULT NULL COMMENT '年',
 	private byte month; // int(1) DEFAULT NULL COMMENT '月',
-	private byte day; // int(1) DEFAULT NULL COMMENT '日',
+	private byte date; // int(1) DEFAULT NULL COMMENT '日',
+	private byte day; // int(1) DEFAULT NULL COMMENT '星期',
 	private byte hour; // int(1) DEFAULT NULL COMMENT '时',
 	private byte minute; // int(1) DEFAULT NULL COMMENT '分',
 	private byte second; // int(1) DEFAULT NULL COMMENT '秒',
@@ -100,6 +101,16 @@ public class UserIncomeDetail implements Serializable
 	public void setMonth(byte month)
 	{
 		this.month = month;
+	}
+
+	public byte getDate()
+	{
+		return date;
+	}
+
+	public void setDate(byte date)
+	{
+		this.date = date;
 	}
 
 	public byte getDay()
