@@ -95,6 +95,28 @@
 		`cid`=#{2}
 	</delete>
 
+	<select id="getCatName" resultType="UserPaymentCategory">
+		SELECT * FROM(
+		SELECT `pid`, `pname`, `cid`, `cname`
+		FROM
+		`user_payment_category`
+		UNION
+		SELECT `pid`, `pname`, `cid`, `cname`
+		FROM
+		`book_payment_category`) T
+		WHERE
+		pid=#{0} AND `cid`=#{1}
+	</select>
+
+	<select id="get" resultType="UserPaymentCategory">
+		SELECT *
+		FROM `user_payment_category`
+		WHERE
+		`userid`=#{0}
+		AND pid=#{1} AND
+		`cid`=#{2}
+	</select>
+
 	<update id="update" parameterType="UserPaymentCategory">
 		UPDATE
 		`user_payment_category`

@@ -54,7 +54,7 @@
 	<insert id="incrementalUpdateCount" parameterType="UserPaymentMode"
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT IGNORE INTO
-		`user_payment_category`
+		`user_payment_mode`
 		(`userid`, `mid`, `mname`, `sid`, `sname`,
 		`count`,
 		`syn`, `created`, `updated`, `status`)
@@ -96,6 +96,26 @@
 		mid=#{1} AND
 		`sid`=#{2}
 	</delete>
+
+	<select id="getModeName" resultType="UserPaymentMode">
+		SELECT * FROM (
+		SELECT `mid`, `mname`, `sid`, `sname`
+		FROM `user_payment_mode`
+		UNION
+		SELECT `mid`, `mname`, `sid`, `sname`
+		FROM `book_payment_mode`) T
+		WHERE
+		mid=#{0} AND `sid`=#{1}
+	</select>
+
+	<select id="get" resultType="UserPaymentMode">
+		SELECT *
+		FROM `user_payment_mode`
+		WHERE
+		`userid`=#{0}
+		AND mid=#{1} AND
+		`sid`=#{2}
+	</select>
 
 	<update id="update" parameterType="UserPaymentMode">
 		UPDATE

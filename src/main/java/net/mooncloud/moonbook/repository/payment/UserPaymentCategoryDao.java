@@ -20,5 +20,9 @@ public interface UserPaymentCategoryDao
 
 	public void update(UserPaymentCategory userPaymentCategory);
 
+	public UserPaymentCategory getCatName(short pid, short cid);
+
+	public UserPaymentCategory get(long userid, short pid, short cid);
+
 	public List<UserPaymentCategory> search(Map<String, Object> querys);
 }

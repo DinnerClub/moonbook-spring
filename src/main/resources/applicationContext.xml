@@ -101,10 +101,12 @@
 	</aop:config>
 
 	<!-- 使用zookeeper注册中心暴露服务地址 用dubbo协议在指定端口暴露服务 声明需要暴露的服务接口 -->
-<!-- 	<dubbo:application name="delievry-app-pipe" />
-	<dubbo:registry address="zookeeper://127.0.0.1:2181" />
-	<dubbo:protocol name="dubbo" port="28569" />
-	<dubbo:service id="s-SellerFtpPermissionsServiceImpl"
-		interface="net.mooncloud.moonbook.service.user.SellerFtpPermissionsService"
-		ref="SellerFtpPermissionsServiceImpl" version="1.0.0" /> -->
+	<dubbo:application name="book-app-pipe" />
+	<dubbo:registry address="${dubbo.registry.address}" />
+	<dubbo:protocol name="dubbo" port="${dubbo.registry.port}" />
+	<dubbo:service id="s-UserPaymentDetailService"
+		interface="net.mooncloud.moonbook.service.payment.UserPaymentDetailService"
+		ref="userPaymentDetailService" version="1.0.0" />
+	<dubbo:reference id="c-UserPaymentDetailService"
+		interface="net.mooncloud.moonbook.service.payment.UserPaymentDetailService" />
 </beans>

@@ -59,7 +59,7 @@ public class SqlFacetQueryString
 			if (fields != null && fields.size() > 0)
 			{
 				fieldSb.append(fields.get(0));
-				for (int i = 1; i < orderby.size(); i++)
+				for (int i = 1; i < fields.size(); i++)
 				{
 					String field = fields.get(i);
 					fieldSb.append(", ").append(field);

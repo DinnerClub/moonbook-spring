@@ -112,12 +112,12 @@
 		detailid=#{0}
 	</delete>
 	
-	<delete id="get" parameterType="Long">
+	<select id="get" parameterType="Long" resultType="UserPaymentDetail">
 		SELECT * FROM
 		`user_payment_detail`
 		WHERE
-		detailid=#{0}
-	</delete>
+		detailid=#{detailid}
+	</select>
 
 	<update id="update" parameterType="UserPaymentDetail">
 		UPDATE

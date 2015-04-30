@@ -9,7 +9,9 @@ import net.mooncloud.moonbook.repository.chart.ChartDataQueryDao;
 import net.mooncloud.moonbook.service.chart.ChartDataQueryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service("chartDataQueryService")
 public class ChartDataQueryServiceImpl implements ChartDataQueryService
 {
 

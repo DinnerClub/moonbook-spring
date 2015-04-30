@@ -34,7 +34,7 @@ public class DaoTest
 	@Autowired
 	BookIncomeModeDao mbIncomeModeDao;
 
-	@Test
+//	@Test
 	public void mbIncomeModeDao()
 	{
 		BookIncomeMode mbPaymentMode = new BookIncomeMode();
@@ -76,16 +76,18 @@ public class DaoTest
 		System.out.println(chartDataQueryDao.userPaymentFacetQuery(queryMap));
 	}
 
-	// @Test
+	 @Test
 	public void userPaymentDetailDao()
 	{
-		UserPaymentDetail userPaymentDetail = new UserPaymentDetail();
-		userPaymentDetail.setDetailid(12345);
-		userPaymentDetail.setMoney(3.45);
-		System.out.println(userPaymentDetail);
-		userPaymentDetailDao.insertIgnore(userPaymentDetail);
-		userPaymentDetail.setMoney(5.32);
-		userPaymentDetailDao.update(userPaymentDetail);
-		userPaymentDetailDao.delete(12345L);
+//		UserPaymentDetail userPaymentDetail = new UserPaymentDetail();
+//		userPaymentDetail.setDetailid(12345);
+//		userPaymentDetail.setMoney(3.45);
+//		System.out.println(userPaymentDetail);
+//		userPaymentDetailDao.insertIgnore(userPaymentDetail);
+//		userPaymentDetail.setMoney(5.32);
+//		userPaymentDetailDao.update(userPaymentDetail);
+//		userPaymentDetailDao.delete(12345L);
+		
+		System.out.println(userPaymentDetailDao.get(1L));
 	}
 }
