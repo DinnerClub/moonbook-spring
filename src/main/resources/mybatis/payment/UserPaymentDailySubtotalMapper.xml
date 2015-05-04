@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper
+	namespace="net.mooncloud.moonbook.repository.payment.UserPaymentDailySubtotalDao">
+
+	<insert id="insertUpdate" parameterType="UserPaymentDailySubtotal"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+		`user_payment_daily_subtotal`
+		(`userid`, `thedate`, `year`,
+		`month`,`date`,
+		`day`, `money`,
+		`syn`, `created`,
+		`updated`, `status`)
+		VALUES (
+		#{userid},
+		#{thedate},
+		#{year},
+		#{month},
+		#{date},
+		#{day},
+		#{money},
+		#{syn},
+		#{created},
+		#{updated},
+		#{status}
+		)
+		ON DUPLICATE KEY
+		UPDATE
+		year=VALUES(year),month=VALUES(month),date=VALUES(date),day=VALUES(day),money=VALUES(money),syn=VALUES(syn),updated=VALUES(updated),status=VALUES(status)
+	</insert>
+
+	<insert id="insertIgnore" parameterType="UserPaymentDailySubtotal"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT IGNORE INTO
+		`user_payment_daily_subtotal`
+		(`userid`, `thedate`, `year`,
+		`month`,`date`,
+		`day`, `money`,
+		`syn`, `created`,
+		`updated`, `status`)
+		VALUES (
+		#{userid},
+		#{thedate},
+		#{year},
+		#{month},
+		#{date},
+		#{day},
+		#{money},
+		#{syn},
+		#{created},
+		#{updated},
+		#{status}
+		)
+	</insert>
+
+	<insert id="incrementalUpdateMoney" parameterType="UserPaymentDailySubtotal"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+		`user_payment_daily_subtotal`
+		(`userid`, `thedate`, `year`,
+		`month`,`date`,
+		`day`, `money`,
+		`syn`, `created`,
+		`updated`, `status`)
+		VALUES (
+		#{userid},
+		#{thedate},
+		#{year},
+		#{month},
+		#{date},
+		#{day},
+		#{money},
+		#{syn},
+		#{created},
+		#{updated},
+		#{status}
+		)
+		ON DUPLICATE KEY
+		UPDATE
+		money=money+VALUES(money),syn=VALUES(syn),updated=VALUES(updated)
+	</insert>
+
+	<!-- 删除 -->
+	<delete id="delete">
+		DELETE FROM
+		`user_payment_daily_subtotal`
+		WHERE
+		userid=#{0} AND thedate=#{1}
+	</delete>
+
+	<update id="update" parameterType="UserPaymentDailySubtotal">
+		UPDATE
+		`user_payment_daily_subtotal`
+		SET `year`=#{year}, `month`=#{month},
+		`date`=#{date},`day`=#{day},
+		`money`=#{money}, `syn`=#{syn},
+		`updated`=#{updated},
+		`status`=#{status} WHERE
+		(`userid`=#{userid} AND
+		thedate=#{thedate})
+	</update>
+
+	<select id="search" resultType="UserPaymentDailySubtotal">
+		SELECT ${query}
+	</select>
+</mapper> 

@@ -78,4 +78,8 @@
 			AND `sid`=#{sid}
 		</if>
 	</update>
+
+	<select id="search" resultType="BookPaymentMode">
+		SELECT ${query}
+	</select>
 </mapper> 

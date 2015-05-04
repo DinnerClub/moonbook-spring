@@ -13,7 +13,7 @@ public interface UserPaymentDailySubtotalDao
 
 	public void incrementalUpdateMoney(UserPaymentDailySubtotal userPaymentDailySubtotal);
 
-	public void delete(Long userid, Long thedate);
+	public void delete(long userid, int thedate);
 
 	public void update(UserPaymentDailySubtotal userPaymentDailySubtotal);
 

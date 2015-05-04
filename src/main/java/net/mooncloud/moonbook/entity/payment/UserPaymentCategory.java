@@ -17,9 +17,9 @@ public class UserPaymentCategory implements Serializable
 	private static final long serialVersionUID = 1L;
 
 	private long userid; // bigint(20) NOT NULL COMMENT '用户id',
-	private short pid; // int(2) NOT NULL COMMENT '父类目id',
+	private int pid; // int(2) NOT NULL COMMENT '父类目id',
 	private String pname; // varchar(32) DEFAULT NULL COMMENT '父类目',
-	private short cid; // int(2) NOT NULL COMMENT '子类目id',
+	private int cid; // int(2) NOT NULL COMMENT '子类目id',
 	private String cname; // varchar(32) DEFAULT NULL COMMENT '子类目',
 	private long count; // bigint(20) DEFAULT '0' COMMENT ' 使用次数',
 
@@ -41,12 +41,12 @@ public class UserPaymentCategory implements Serializable
 		this.userid = userid;
 	}
 
-	public short getPid()
+	public int getPid()
 	{
 		return pid;
 	}
 
-	public void setPid(short pid)
+	public void setPid(int pid)
 	{
 		this.pid = pid;
 	}
@@ -61,12 +61,12 @@ public class UserPaymentCategory implements Serializable
 		this.pname = pname;
 	}
 
-	public short getCid()
+	public int getCid()
 	{
 		return cid;
 	}
 
-	public void setCid(short cid)
+	public void setCid(int cid)
 	{
 		this.cid = cid;
 	}

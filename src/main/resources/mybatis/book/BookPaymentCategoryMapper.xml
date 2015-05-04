@@ -77,4 +77,8 @@
 			AND `cid`=#{cid}
 		</if>
 	</update>
+
+	<select id="search" resultType="BookPaymentCategory">
+		SELECT ${query}
+	</select>
 </mapper> 

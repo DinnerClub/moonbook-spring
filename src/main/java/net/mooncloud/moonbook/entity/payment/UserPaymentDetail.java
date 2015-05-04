@@ -24,7 +24,7 @@ public class UserPaymentDetail implements Serializable
 
 	protected long detailid; // bigint(20) NOT NULL COMMENT '账目id',
 	protected long userid; // bigint(20) DEFAULT NULL COMMENT '用户id',
-	private int thedate; // int(4) DEFAULT NULL COMMENT '日期',
+	protected int thedate; // int(4) DEFAULT NULL COMMENT '日期',
 	protected short year; // int(2) DEFAULT NULL COMMENT '年',
 	protected byte month; // int(1) DEFAULT NULL COMMENT '月',
 	protected byte date; // int(1) DEFAULT NULL COMMENT '日',
@@ -37,10 +37,10 @@ public class UserPaymentDetail implements Serializable
 	protected double latitude; // double DEFAULT NULL COMMENT '纬度坐标',
 	protected double longitude; // double DEFAULT NULL COMMENT '经度坐标',
 	protected String address; // varchar(255) DEFAULT NULL COMMENT '地址',
-	protected short pid; // int(2) DEFAULT NULL COMMENT '用途类目',
-	protected short cid; // int(2) DEFAULT NULL,
-	protected short mid; // int(2) DEFAULT NULL COMMENT '支出方式',
-	protected short sid; // int(2) DEFAULT NULL,
+	protected int pid; // int(2) DEFAULT NULL COMMENT '用途类目',
+	protected int cid; // int(2) DEFAULT NULL,
+	protected int mid; // int(2) DEFAULT NULL COMMENT '支出方式',
+	protected int sid; // int(2) DEFAULT NULL,
 	protected double money; // decimal(12,2) DEFAULT NULL COMMENT '支出金额',
 	protected String comment; // varchar(200) DEFAULT NULL COMMENT '备注',
 	protected double curlat; // double DEFAULT NULL COMMENT '当前纬度',
@@ -194,42 +194,42 @@ public class UserPaymentDetail implements Serializable
 		this.address = address;
 	}
 
-	public short getPid()
+	public int getPid()
 	{
 		return pid;
 	}
 
-	public void setPid(short pid)
+	public void setPid(int pid)
 	{
 		this.pid = pid;
 	}
 
-	public short getCid()
+	public int getCid()
 	{
 		return cid;
 	}
 
-	public void setCid(short cid)
+	public void setCid(int cid)
 	{
 		this.cid = cid;
 	}
 
-	public short getMid()
+	public int getMid()
 	{
 		return mid;
 	}
 
-	public void setMid(short mid)
+	public void setMid(int mid)
 	{
 		this.mid = mid;
 	}
 
-	public short getSid()
+	public int getSid()
 	{
 		return sid;
 	}
 
-	public void setSid(short sid)
+	public void setSid(int sid)
 	{
 		this.sid = sid;
 	}
@@ -336,5 +336,10 @@ public class UserPaymentDetail implements Serializable
 		}
 		sb.append("]");
 		return sb.toString();
+	}
+	
+	public static void main(String[] args)
+	{
+		System.out.println();
 	}
 }

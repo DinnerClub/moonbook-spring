@@ -13,8 +13,8 @@ import net.mooncloud.moonbook.repository.payment.UserPaymentCategoryDao;
 import net.mooncloud.moonbook.repository.payment.UserPaymentDailySubtotalDao;
 import net.mooncloud.moonbook.repository.payment.UserPaymentDetailDao;
 import net.mooncloud.moonbook.repository.payment.UserPaymentModeDao;
-import net.mooncloud.moonbook.service.chart.impl.SqlFacetQueryString;
 import net.mooncloud.moonbook.service.payment.UserPaymentDetailService;
+import net.mooncloud.moonbook.utils.SqlFacetQueryString;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,7 +46,7 @@ public class UserPaymentDetailServiceImpl implements UserPaymentDetailService
 	@Override
 	public UserPaymentDetail delete(UserPaymentDetail userPaymentDetail)
 	{
-		return update(null, userPaymentDetail);
+		return update(userPaymentDetail, null);
 	}
 
 	public UserPaymentDetail update(UserPaymentDetail userPaymentDetailOrigin, UserPaymentDetail userPaymentDetail)
@@ -78,20 +78,22 @@ public class UserPaymentDetailServiceImpl implements UserPaymentDetailService
 		}
 		else if (userPaymentDetail == null)
 		{// delete
-			userPaymentDetailOrigin.setStatus((short) 1);
-			userPaymentDetailDao.update(userPaymentDetailOrigin);
+			userPaymentDetail = userPaymentDetailOrigin;
+
+			userPaymentDetail.setStatus((short) 1);
+			userPaymentDetailDao.update(userPaymentDetail);
 
 			// daily subtotal
-			moneyDiff = 0 - userPaymentDetailOrigin.getMoney();
+			moneyDiff = 0 - userPaymentDetail.getMoney();
 			if ((int) (moneyDiff * 100) != 0) // update DailySubtotal
 			{
-				updateDailySubtotal(userPaymentDetailOrigin, moneyDiff);
+				updateDailySubtotal(userPaymentDetail, moneyDiff);
 			}
 
 			// user category
-			updateUserCategoryCount(userPaymentDetailOrigin, -1);
+			updateUserCategoryCount(userPaymentDetail, -1);
 			// user mode
-			updateUserModeCount(userPaymentDetailOrigin, -1);
+			updateUserModeCount(userPaymentDetail, -1);
 		}
 		else
 		{// update
@@ -133,6 +135,7 @@ public class UserPaymentDetailServiceImpl implements UserPaymentDetailService
 			userPaymentDailySubtotal.setYear(userPaymentDetail.getYear());
 			userPaymentDailySubtotal.setMonth(userPaymentDetail.getMonth());
 			userPaymentDailySubtotal.setDate(userPaymentDetail.getDate());
+			userPaymentDailySubtotal.setDay(userPaymentDetail.getDay());
 			userPaymentDailySubtotal.setMoney(moneyDiff);
 			userPaymentDailySubtotal.setSyn(userPaymentDetail.getSyn());
 			userPaymentDailySubtotal.setCreated(userPaymentDetail.getCreated());
@@ -144,7 +147,8 @@ public class UserPaymentDetailServiceImpl implements UserPaymentDetailService
 
 	private void updateUserCategoryCount(UserPaymentDetail userPaymentDetail, long count)
 	{
-		UserPaymentCategory userPaymentCategory = userPaymentCategoryDao.getCatName(userPaymentDetail.getPid(), userPaymentDetail.getCid());
+		UserPaymentCategory userPaymentCategory = userPaymentCategoryDao.getCatName(userPaymentDetail.getUserid(), userPaymentDetail.getPid(),
+				userPaymentDetail.getCid());
 		userPaymentCategory.setUserid(userPaymentDetail.getUserid());
 		userPaymentCategory.setCount(count);
 		userPaymentCategory.setSyn(userPaymentDetail.getSyn());

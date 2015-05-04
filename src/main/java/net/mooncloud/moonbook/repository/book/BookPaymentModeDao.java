@@ -11,9 +11,9 @@ public interface BookPaymentModeDao
 
 	public void insertIgnore(BookPaymentMode mbPaymentMode);
 
-	public void deleteMid(short mid);
+	public void deleteMid(int mid);
 
-	public void delete(short mid, short sid);
+	public void delete(int mid, int sid);
 
 	public void update(BookPaymentMode mbPaymentMode);
 

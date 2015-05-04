@@ -14,15 +14,15 @@ public interface UserPaymentModeDao
 
 	public void incrementalUpdateCount(UserPaymentMode userPaymentMode);
 
-	public void deleteMid(long userid, short mid);
+	public void deleteMid(long userid, int mid);
 
-	public void delete(long userid, short mid, short sid);
+	public void delete(long userid, int mid, int sid);
 
 	public void update(UserPaymentMode userPaymentMode);
 
-	public UserPaymentMode getModeName(short mid, short sid);
+	public UserPaymentMode getModeName(int mid, int sid);
 
-	public UserPaymentMode get(long userid, short mid, short sid);
+	public UserPaymentMode get(long userid, int mid, int sid);
 
 	public List<UserPaymentMode> search(Map<String, Object> querys);
 }

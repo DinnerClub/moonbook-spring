@@ -37,14 +37,15 @@ public class UserIncomeDetail implements Serializable
 	private double latitude; // double DEFAULT NULL COMMENT '纬度坐标',
 	private double longitude; // double DEFAULT NULL COMMENT '经度坐标',
 	private String address; // varchar(255) DEFAULT NULL COMMENT '地址',
-	private short pid; // int(2) DEFAULT NULL COMMENT '用途类目',
-	private short cid; // int(2) DEFAULT NULL,
-	private short mid; // int(2) DEFAULT NULL COMMENT '收入方式',
-	private short sid; // int(2) DEFAULT NULL,
+	private int pid; // int(2) DEFAULT NULL COMMENT '用途类目',
+	private int cid; // int(2) DEFAULT NULL,
+	private int mid; // int(2) DEFAULT NULL COMMENT '收入方式',
+	private int sid; // int(2) DEFAULT NULL,
 	private double money; // decimal(12,2) DEFAULT NULL COMMENT '收入金额',
 	private String comment; // varchar(200) DEFAULT NULL COMMENT '备注',
 	private double curlat; // double DEFAULT NULL COMMENT '当前纬度',
 	private double curlon; // double DEFAULT NULL COMMENT '当前经度',
+	
 	private short syn; // int(2) DEFAULT '0' COMMENT '同步标识',
 	private Date created; // timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT
 							// '创建时间',
@@ -193,42 +194,42 @@ public class UserIncomeDetail implements Serializable
 		this.address = address;
 	}
 
-	public short getPid()
+	public int getPid()
 	{
 		return pid;
 	}
 
-	public void setPid(short pid)
+	public void setPid(int pid)
 	{
 		this.pid = pid;
 	}
 
-	public short getCid()
+	public int getCid()
 	{
 		return cid;
 	}
 
-	public void setCid(short cid)
+	public void setCid(int cid)
 	{
 		this.cid = cid;
 	}
 
-	public short getMid()
+	public int getMid()
 	{
 		return mid;
 	}
 
-	public void setMid(short mid)
+	public void setMid(int mid)
 	{
 		this.mid = mid;
 	}
 
-	public short getSid()
+	public int getSid()
 	{
 		return sid;
 	}
 
-	public void setSid(short sid)
+	public void setSid(int sid)
 	{
 		this.sid = sid;
 	}

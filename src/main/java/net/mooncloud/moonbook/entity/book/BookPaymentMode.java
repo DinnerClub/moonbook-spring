@@ -16,9 +16,9 @@ public class BookPaymentMode implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private short mid; // int(2) NOT NULL COMMENT '支付方式id',
+	private int mid; // int(2) NOT NULL COMMENT '支付方式id',
 	private String mname; // varchar(32) DEFAULT NULL COMMENT '支付方式',
-	private short sid; // int(2) NOT NULL COMMENT '资金源id',
+	private int sid; // int(2) NOT NULL COMMENT '资金源id',
 	private String sname; // varchar(32) DEFAULT NULL COMMENT '资金源',
 	private long count; // bigint(20) DEFAULT '0' COMMENT ' 使用次数',
 
@@ -30,12 +30,12 @@ public class BookPaymentMode implements Serializable
 							// '更新时间',
 	private short status; // int(2) DEFAULT '0' COMMENT '状态',
 
-	public short getMid()
+	public int getMid()
 	{
 		return mid;
 	}
 
-	public void setMid(short mid)
+	public void setMid(int mid)
 	{
 		this.mid = mid;
 	}
@@ -50,12 +50,12 @@ public class BookPaymentMode implements Serializable
 		this.mname = mname;
 	}
 
-	public short getSid()
+	public int getSid()
 	{
 		return sid;
 	}
 
-	public void setSid(short sid)
+	public void setSid(int sid)
 	{
 		this.sid = sid;
 	}

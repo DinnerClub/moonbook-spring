@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
-<mapper namespace="net.mooncloud.moonbook.repository.payment.UserPaymentModeDao">
+<mapper namespace="net.mooncloud.moonbook.repository.income.UserIncomeModeDao">
 
-	<insert id="insertIgnore" parameterType="UserPaymentMode"
+	<insert id="insertIgnore" parameterType="UserIncomeMode"
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT IGNORE INTO
-		`user_payment_mode`
+		`user_income_mode`
 		(`userid`, `mid`, `mname`, `sid`, `sname`,`count`,
 		`syn`, `created`,
 		`updated`, `status`)
@@ -25,10 +25,10 @@
 		)
 	</insert>
 
-	<insert id="insertUpdate" parameterType="UserPaymentMode"
+	<insert id="insertUpdate" parameterType="UserIncomeMode"
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT IGNORE INTO
-		`user_payment_mode`
+		`user_income_mode`
 		(`userid`, `mid`, `mname`, `sid`, `sname`,`count`,
 		`syn`,
 		`created`,
@@ -51,10 +51,10 @@
 		mname=VALUES(mname),sname=VALUES(sname),syn=VALUES(syn),updated=VALUES(updated),status=VALUES(status)
 	</insert>
 
-	<insert id="incrementalUpdateCount" parameterType="UserPaymentMode"
+	<insert id="incrementalUpdateCount" parameterType="UserIncomeMode"
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT IGNORE INTO
-		`user_payment_mode`
+		`user_income_mode`
 		(`userid`, `mid`, `mname`, `sid`, `sname`,
 		`count`,
 		`syn`, `created`, `updated`, `status`)
@@ -79,7 +79,7 @@
 	<!-- 删除 -->
 	<delete id="deleteMid">
 		DELETE FROM
-		`user_payment_mode`
+		`user_income_mode`
 		WHERE
 		`userid`=#{0}
 		AND
@@ -89,7 +89,7 @@
 	<!-- 删除 -->
 	<delete id="delete">
 		DELETE FROM
-		`user_payment_mode`
+		`user_income_mode`
 		WHERE
 		`userid`=#{0}
 		AND
@@ -97,29 +97,32 @@
 		`sid`=#{2}
 	</delete>
 
-	<select id="getModeName" resultType="UserPaymentMode">
+	<select id="getModeName" resultType="UserIncomeMode">
 		SELECT * FROM (
-		SELECT `mid`, `mname`, `sid`, `sname`
-		FROM `user_payment_mode`
+		SELECT `mid`,
+		`mname`, `sid`, `sname`
+		FROM `user_income_mode`
 		UNION
-		SELECT `mid`, `mname`, `sid`, `sname`
-		FROM `book_payment_mode`) T
+		SELECT `mid`,
+		`mname`, `sid`, `sname`
+		FROM `book_income_mode`) T
 		WHERE
-		mid=#{0} AND `sid`=#{1}
+		mid=#{0} AND
+		`sid`=#{1}
 	</select>
 
-	<select id="get" resultType="UserPaymentMode">
+	<select id="get" resultType="UserIncomeMode">
 		SELECT *
-		FROM `user_payment_mode`
+		FROM `user_income_mode`
 		WHERE
 		`userid`=#{0}
 		AND mid=#{1} AND
 		`sid`=#{2}
 	</select>
 
-	<update id="update" parameterType="UserPaymentMode">
+	<update id="update" parameterType="UserIncomeMode">
 		UPDATE
-		`user_payment_mode`
+		`user_income_mode`
 		SET `mid`=#{mid}, `mname`=#{mname},
 		<if test="sid>0">
 			`sid`=#{sid}, `sname`=#{sname},
@@ -134,7 +137,7 @@
 		</if>
 	</update>
 
-	<select id="search" resultType="UserPaymentMode">
+	<select id="search" resultType="UserIncomeMode">
 		SELECT ${query}
 	</select>
 </mapper> 

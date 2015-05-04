@@ -11,9 +11,9 @@ public interface BookIncomeModeDao
 
 	public void insertIgnore(BookIncomeMode mbIncomeMode);
 
-	public void deleteMid(short mid);
+	public void deleteMid(int mid);
 
-	public void delete(short mid, short sid);
+	public void delete(int mid, int sid);
 
 	public void update(BookIncomeMode mbIncomeMode);
 

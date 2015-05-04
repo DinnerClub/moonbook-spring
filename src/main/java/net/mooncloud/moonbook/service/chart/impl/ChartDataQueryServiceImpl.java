@@ -7,6 +7,7 @@ import java.util.Map;
 import net.mooncloud.moonbook.entity.chart.ChartElement;
 import net.mooncloud.moonbook.repository.chart.ChartDataQueryDao;
 import net.mooncloud.moonbook.service.chart.ChartDataQueryService;
+import net.mooncloud.moonbook.utils.SqlFacetQueryString;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,11 @@ public class ChartDataQueryServiceImpl implements ChartDataQueryService
 	public List<ChartElement> userPaymentFacetQuery(List<String> fields, List<String> aggregates, String index, String table, Map<String, Object> querys,
 			List<String> orderby, String limit, String offset)
 	{
+		String query = SqlFacetQueryString.facetQueryString(fields, aggregates, index, table, querys, orderby, limit, offset, true);
+		Map<String, Object> queryMap = new HashMap<String, Object>(1);
+		queryMap.put("query", query);
+		return chartDataQueryDao.userPaymentFacetQuery(queryMap);
+
 		// try
 		// {
 		// connection = DBConf.getConnection();
@@ -57,10 +63,5 @@ public class ChartDataQueryServiceImpl implements ChartDataQueryService
 		// }
 		//
 		// return null;
-
-		String query = SqlFacetQueryString.facetQueryString(fields, aggregates, index, table, querys, orderby, limit, offset, true);
-		Map<String, Object> queryMap = new HashMap<String, Object>(1);
-		queryMap.put("query", query);
-		return chartDataQueryDao.userPaymentFacetQuery(queryMap);
 	}
 }

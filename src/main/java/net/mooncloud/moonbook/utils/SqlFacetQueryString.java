@@ -1,4 +1,4 @@
-package net.mooncloud.moonbook.service.chart.impl;
+package net.mooncloud.moonbook.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -93,14 +93,14 @@ public class SqlFacetQueryString
 				Entry<String, Object> entry = querysEntryList.get(0);
 				String key = entry.getKey();
 				Object value = entry.getValue();
-				if (value instanceof String)
-				{
-					querySb.append(key).append("=").append("\"").append(value).append("\"");
-				}
-				else
-				{
-					querySb.append(key).append("=").append(value);
-				}
+				// if (value instanceof String)
+				// {
+				// querySb.append(key).append("=").append("\"").append(value).append("\"");
+				// }
+				// else
+				// {
+				querySb.append(key).append("=").append("'").append(value).append("'");
+				// }
 				for (int i = 1; i < querysEntryList.size(); i++)
 				{
 					entry = querysEntryList.get(i);
@@ -108,14 +108,14 @@ public class SqlFacetQueryString
 					value = entry.getValue();
 
 					querySb.append(" AND ");
-					if (value instanceof String)
-					{
-						querySb.append(key).append("=").append("\"").append(value).append("\"");
-					}
-					else
-					{
-						querySb.append(key).append("=").append(value);
-					}
+					// if (value instanceof String)
+					// {
+					// querySb.append(key).append("=").append("\"").append(value).append("\"");
+					// }
+					// else
+					// {
+					querySb.append(key).append("=").append("'").append(value).append("'");
+					// }
 				}
 			}// query
 
@@ -161,11 +161,11 @@ public class SqlFacetQueryString
 		String offset = "0";
 		boolean facet = true;
 
-		// querys.put("year", 2015);
-		// querys.put("comment", "2222");
+		querys.put("year", 2015);
+		querys.put("comment", "2222");
 		fields.add("month");
 		fields.add("day");
-		fields.add("*");
+//		fields.add("*");
 		aggregates.add("SUM");
 		aggregates.add("COUNT");
 		orderby.add("SUM DESC");

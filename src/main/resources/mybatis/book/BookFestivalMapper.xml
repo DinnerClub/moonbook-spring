@@ -8,7 +8,7 @@
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT IGNORE INTO
 		`book_festival`
-		(`thedate`, `year`, `month`, `date`, `festival`, `lunar`,
+		(`thedate`, `year`, `month`, `date`, `day`, `festival`, `lunar`,
 		`syn`,
 		`created`, `updated`, `status`)
 		VALUES (
@@ -16,6 +16,7 @@
 		#{year},
 		#{month},
 		#{date},
+		#{day},
 		#{festival},
 		#{lunar},
 		#{syn},
@@ -29,7 +30,7 @@
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT IGNORE INTO
 		`book_festival`
-		(`thedate`, `year`, `month`, `date`, `festival`, `lunar`,
+		(`thedate`, `year`, `month`, `date`, `day`, `festival`, `lunar`,
 		`syn`,
 		`created`, `updated`, `status`)
 		VALUES (
@@ -37,6 +38,7 @@
 		#{year},
 		#{month},
 		#{date},
+		#{day},
 		#{festival},
 		#{lunar},
 		#{syn},
@@ -47,7 +49,7 @@
 		ON DUPLICATE
 		KEY
 		UPDATE
-		year=VALUES(year),month=VALUES(month),date=VALUES(date),festival=VALUES(festival),syn=VALUES(syn),updated=VALUES(updated),status=VALUES(status)
+		year=VALUES(year),month=VALUES(month),date=VALUES(date),day=VALUES(day),festival=VALUES(festival),syn=VALUES(syn),updated=VALUES(updated),status=VALUES(status)
 	</insert>
 
 	<!-- 删除 -->
@@ -72,7 +74,7 @@
 		`book_festival`
 		SET
 		`year`=#{year}, `month`=#{month},
-		`date`=#{date},
+		`date`=#{date},`day`=#{day},
 		`festival`=#{festival},
 		`syn`=#{syn}, `updated`=#{updated},
 		`status`=#{status}
@@ -80,4 +82,8 @@
 		`thedate`=#{thedate}
 		AND `lunar`=#{lunar}
 	</update>
+
+	<select id="search" resultType="BookFestival">
+		SELECT ${query}
+	</select>
 </mapper> 

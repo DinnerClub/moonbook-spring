@@ -1,4 +1,4 @@
-package net.mooncloud.moonbook.entity.payment;
+package net.mooncloud.moonbook.entity.income;
 
 import java.beans.PropertyDescriptor;
 import java.io.Serializable;
@@ -8,8 +8,8 @@ import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias(value = "userPaymentDailySubtotal")
-public class UserPaymentDailySubtotal implements Serializable
+@Alias(value = "userIncomeDailySubtotal")
+public class UserIncomeDailySubtotal implements Serializable
 {
 	/**
 	 * 
@@ -22,7 +22,7 @@ public class UserPaymentDailySubtotal implements Serializable
 	protected byte month; // int(1) DEFAULT NULL COMMENT '月',
 	protected byte date; // int(1) DEFAULT NULL COMMENT '日',
 	protected byte day; // int(1) DEFAULT NULL COMMENT '星期',
-	protected double money; // decimal(12,2) DEFAULT NULL COMMENT '支出金额',
+	protected double money; // decimal(12,2) DEFAULT NULL COMMENT '收入金额',
 
 	protected short syn; // int(2) DEFAULT '0' COMMENT '同步标识',
 	protected Date created; // timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT

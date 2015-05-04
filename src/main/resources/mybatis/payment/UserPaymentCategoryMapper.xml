@@ -96,16 +96,32 @@
 	</delete>
 
 	<select id="getCatName" resultType="UserPaymentCategory">
-		SELECT * FROM(
+		SELECT DISTINCT * FROM(
 		SELECT `pid`, `pname`, `cid`, `cname`
 		FROM
 		`user_payment_category`
-		UNION
-		SELECT `pid`, `pname`, `cid`, `cname`
-		FROM
-		`book_payment_category`) T
 		WHERE
-		pid=#{0} AND `cid`=#{1}
+		userid=#{0} AND pid=#{1} AND `cid`=#{2}
+		UNION
+		SELECT `pid`, `pname`,
+		`cid`, `cname`
+		FROM
+		`book_payment_category`
+		WHERE pid=#{1} AND
+		`cid`=#{2}) T
+		LIMIT 1
+	</select>
+
+	<select id="getAllPid" resultType="UserPaymentCategory">
+		SELECT `pid`, `pname`
+		FROM
+		`user_payment_category`
+		WHERE
+		userid=#{0}
+		UNION
+		SELECT `pid`, `pname`
+		FROM
+		`book_payment_category`
 	</select>
 
 	<select id="get" resultType="UserPaymentCategory">
@@ -132,4 +148,8 @@
 			AND `cid`=#{cid}
 		</if>
 	</update>
+
+	<select id="search" resultType="UserPaymentCategory">
+		SELECT ${query}
+	</select>
 </mapper> 

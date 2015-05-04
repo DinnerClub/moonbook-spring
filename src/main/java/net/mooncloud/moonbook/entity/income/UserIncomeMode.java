@@ -1,4 +1,4 @@
-package net.mooncloud.moonbook.entity.book;
+package net.mooncloud.moonbook.entity.income;
 
 import java.beans.PropertyDescriptor;
 import java.io.Serializable;
@@ -8,14 +8,15 @@ import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias(value = "bookIncomeMode")
-public class BookIncomeMode implements Serializable
+@Alias(value = "userIncomeMode")
+public class UserIncomeMode implements Serializable
 {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private long userid; // bigint(20) NOT NULL COMMENT '用户id',
 	private int mid; // int(2) NOT NULL COMMENT '收入方式id',
 	private String mname; // varchar(32) DEFAULT NULL COMMENT '收入方式',
 	private int sid; // int(2) NOT NULL COMMENT '资金源id',
@@ -29,6 +30,16 @@ public class BookIncomeMode implements Serializable
 							// COMMENT
 							// '更新时间',
 	private short status; // int(2) DEFAULT '0' COMMENT '状态',
+
+	public long getUserid()
+	{
+		return userid;
+	}
+
+	public void setUserid(long userid)
+	{
+		this.userid = userid;
+	}
 
 	public int getMid()
 	{

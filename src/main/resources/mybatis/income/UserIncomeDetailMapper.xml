@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
-<mapper namespace="net.mooncloud.moonbook.repository.payment.UserPaymentDetailDao">
+<mapper namespace="net.mooncloud.moonbook.repository.income.UserIncomeDetailDao">
 
-	<insert id="insertUpdate" parameterType="UserPaymentDetail"
+	<insert id="insertUpdate" parameterType="UserIncomeDetail"
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO
-		`user_payment_detail`
+		`user_income_detail`
 		(`detailid`, `userid`, `thedate`, `year`,
 		`month`,`date`, `day`,
 		`hour`,
@@ -59,12 +59,13 @@
 		syn=VALUES(syn),updated=VALUES(updated),status=VALUES(status)
 	</insert>
 
-	<insert id="insertIgnore" parameterType="UserPaymentDetail"
+	<insert id="insertIgnore" parameterType="UserIncomeDetail"
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT IGNORE INTO
-		`user_payment_detail`
+		`user_income_detail`
 		(`detailid`, `userid`, `thedate`, `year`,
-		`month`, `date`, `day`,
+		`month`,
+		`date`, `day`,
 		`hour`, `minute`,
 		`second`, `time`, `latitude`,
 		`longitude`, `address`,
@@ -107,22 +108,23 @@
 	<!-- 删除 -->
 	<delete id="delete" parameterType="Long">
 		DELETE FROM
-		`user_payment_detail`
+		`user_income_detail`
 		WHERE
 		detailid=#{0}
 	</delete>
-	
-	<select id="get" parameterType="Long" resultType="UserPaymentDetail">
+
+	<select id="get" parameterType="Long" resultType="UserIncomeDetail">
 		SELECT * FROM
-		`user_payment_detail`
+		`user_income_detail`
 		WHERE
 		detailid=#{detailid}
 	</select>
 
-	<update id="update" parameterType="UserPaymentDetail">
+	<update id="update" parameterType="UserIncomeDetail">
 		UPDATE
-		`user_payment_detail`
-		SET `userid`=#{userid},`thedate`=#{thedate},
+		`user_income_detail`
+		SET
+		`userid`=#{userid},`thedate`=#{thedate},
 		`year`=#{year},
 		`month`=#{month}, `date`=#{date},`day`=#{day},
 		`hour`=#{hour},
@@ -130,18 +132,22 @@
 		`second`=#{second}, `time`=#{time},
 		`latitude`=#{latitude},
 		`longitude`=#{longitude},
-		`address`=#{address}, `pid`=#{pid},
+		`address`=#{address},
+		`pid`=#{pid},
 		`cid`=#{cid}, `mid`=#{mid},
-		`sid`=#{sid}, `money`=#{money},
+		`sid`=#{sid},
+		`money`=#{money},
 		`comment`=#{comment},
-		`curlat`=#{curlat}, `curlon`=#{curlon},
+		`curlat`=#{curlat},
+		`curlon`=#{curlon},
 		`syn`=#{syn},
-		`updated`=#{updated}, `status`=#{status} WHERE
+		`updated`=#{updated},
+		`status`=#{status} WHERE
 		(`detailid`=#{detailid})
 	</update>
-	
-	<select id="search" resultType="UserPaymentDetail">
+
+	<select id="search" resultType="UserIncomeDetail">
 		SELECT ${query}
 	</select>
-	
+
 </mapper> 

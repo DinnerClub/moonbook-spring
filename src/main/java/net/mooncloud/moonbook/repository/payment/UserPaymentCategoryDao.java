@@ -14,15 +14,17 @@ public interface UserPaymentCategoryDao
 
 	public void incrementalUpdateCount(UserPaymentCategory userPaymentCategory);
 
-	public void deletePid(long userid, short pid);
+	public void deletePid(long userid, int pid);
 
-	public void delete(long userid, short pid, short cid);
+	public void delete(long userid, int pid, int cid);
 
 	public void update(UserPaymentCategory userPaymentCategory);
 
-	public UserPaymentCategory getCatName(short pid, short cid);
+	public UserPaymentCategory getCatName(long userid, int pid, int cid);
 
-	public UserPaymentCategory get(long userid, short pid, short cid);
+	public UserPaymentCategory get(long userid, int pid, int cid);
+
+	public List<UserPaymentCategory> getAllPid(long userid);
 
 	public List<UserPaymentCategory> search(Map<String, Object> querys);
 }
