@@ -1,11 +1,12 @@
 package net.mooncloud.moonbook;
 
 import java.util.Date;
-
-import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 import net.mooncloud.moonbook.entity.payment.UserPaymentDetail;
 import net.mooncloud.moonbook.service.payment.UserPaymentDetailService;
+import net.mooncloud.moonbook.service.payment.UserPaymentModeService;
 import net.mooncloud.moonbook.utils.SomeStaticUtils;
 
 import org.junit.Test;
@@ -18,11 +19,20 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(value = "classpath*:applicationContext.xml")
 public class ServiceDubboTest
 {
-//	@Resource
+	// @Resource
 	@Autowired
 	UserPaymentDetailService userPaymentDetailService;
+	@Autowired
+	UserPaymentModeService bookFestivalService;
 
 	@Test
+	public void search()
+	{
+		Map<String, Object> querys = new HashMap<String, Object>();
+		System.out.println(bookFestivalService.search(querys));
+	}
+
+	// @Test
 	public void userPaymentDetailService()
 	{
 		UserPaymentDetail userPaymentDetail = new UserPaymentDetail();
@@ -50,7 +60,7 @@ public class ServiceDubboTest
 		userPaymentDetail.setSid((short) 1001);
 
 		userPaymentDetail.setMoney(45.5);
-		
+
 		userPaymentDetail.setComment("");
 
 		userPaymentDetail.setCurlat(122.12);

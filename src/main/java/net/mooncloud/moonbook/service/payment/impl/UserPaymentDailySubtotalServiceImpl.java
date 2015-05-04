@@ -11,7 +11,9 @@ import net.mooncloud.moonbook.service.payment.UserPaymentDailySubtotalService;
 import net.mooncloud.moonbook.utils.SqlFacetQueryString;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service("userPaymentDailySubtotalService")
 public class UserPaymentDailySubtotalServiceImpl implements UserPaymentDailySubtotalService
 {
 	@Autowired

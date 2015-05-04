@@ -11,7 +11,9 @@ import net.mooncloud.moonbook.service.payment.UserPaymentCategoryService;
 import net.mooncloud.moonbook.utils.SqlFacetQueryString;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service("userPaymentCategoryService")
 public class UserPaymentCategoryServiceImpl implements UserPaymentCategoryService
 {
 	@Autowired

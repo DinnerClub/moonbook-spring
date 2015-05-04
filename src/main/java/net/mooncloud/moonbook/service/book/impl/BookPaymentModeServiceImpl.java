@@ -11,7 +11,9 @@ import net.mooncloud.moonbook.service.book.BookPaymentModeService;
 import net.mooncloud.moonbook.utils.SqlFacetQueryString;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service("bookPaymentModeService")
 public class BookPaymentModeServiceImpl implements BookPaymentModeService
 {
 	@Autowired
