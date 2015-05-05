@@ -5,8 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.mooncloud.moonbook.entity.payment.UserPaymentDetail;
+import net.mooncloud.moonbook.entity.user.User;
 import net.mooncloud.moonbook.service.payment.UserPaymentDetailService;
 import net.mooncloud.moonbook.service.payment.UserPaymentModeService;
+import net.mooncloud.moonbook.service.user.UserService;
+import net.mooncloud.moonbook.utils.MD5Hash;
 import net.mooncloud.moonbook.utils.SomeStaticUtils;
 
 import org.junit.Test;
@@ -24,8 +27,29 @@ public class ServiceDubboTest
 	UserPaymentDetailService userPaymentDetailService;
 	@Autowired
 	UserPaymentModeService bookFestivalService;
+	@Autowired
+	UserService userService;
 
 	@Test
+	public void userService()
+	{
+		User user = new User();
+		user.setUserid(13456990586L);
+		user.setUsername("13456990586");
+		user.setUsernick("J.D.YANG");
+		user.setPassword(MD5Hash.digest("abcdefg1234567").toString());
+		user.setSalt(user.getPassword());
+		user.setEmail("yangjd@126.com");
+		user.setMobile("13456990586");
+		user.setCreated(new Date());
+		user.setUpdated(user.getCreated());
+		System.out.println(userService.signup(userService.encrypt(user)));
+		// System.out.println(userService.signin(userService.encrypt(user)));
+		// System.out.println(userService.encrypt(user));
+		// System.out.println(userService.decrypt(user));
+	}
+
+	// @Test
 	public void search()
 	{
 		Map<String, Object> querys = new HashMap<String, Object>();

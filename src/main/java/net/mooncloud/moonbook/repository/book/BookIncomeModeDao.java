@@ -7,15 +7,15 @@ import net.mooncloud.moonbook.entity.book.BookIncomeMode;
 
 public interface BookIncomeModeDao
 {
-	public void insertUpdate(BookIncomeMode mbIncomeMode);
+	public void insertUpdate(BookIncomeMode bookIncomeMode);
 
-	public void insertIgnore(BookIncomeMode mbIncomeMode);
+	public void insertIgnore(BookIncomeMode bookIncomeMode);
 
 	public void deleteMid(int mid);
 
 	public void delete(int mid, int sid);
 
-	public void update(BookIncomeMode mbIncomeMode);
+	public void update(BookIncomeMode bookIncomeMode);
 
 	public List<BookIncomeMode> search(Map<String, Object> querys);
 }

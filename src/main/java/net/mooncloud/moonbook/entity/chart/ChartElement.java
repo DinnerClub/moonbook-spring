@@ -4,6 +4,7 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import org.apache.commons.lang.NullArgumentException;
 import org.apache.ibatis.type.Alias;
 
 import net.mooncloud.moonbook.entity.payment.UserPaymentDetail;
@@ -57,7 +58,7 @@ public class ChartElement extends UserPaymentDetail
 		StringBuilder sb = new StringBuilder();
 		Class<?> clazz = this.getClass();
 		sb.append(clazz.getName()).append(" [");
-		clazz = UserPaymentDetail.class;
+		clazz = clazz.getSuperclass();
 		for (Field field : clazz.getDeclaredFields())
 		{
 			PropertyDescriptor pd;
@@ -93,7 +94,16 @@ public class ChartElement extends UserPaymentDetail
 
 	public static void main(String[] args)
 	{
-		ChartElement o = new ChartElement();
-		System.out.println(o.toString());
+		try
+		{
+			ChartElement o = new ChartElement();
+			System.out.println(o.toString());
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.toString());
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 }

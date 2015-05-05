@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="net.mooncloud.moonbook.repository.user.UserDao">
+
+	<insert id="insertIgnore" parameterType="User" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT IGNORE INTO
+		`auth_user`
+		(`userid`, `username`,
+		`usernick`,
+		`password`, `salt`, `email`, `mobile`,
+		`syn`,
+		`created`,
+		`updated`,
+		`status`)
+		VALUES (
+		#{userid},
+		#{username},
+		#{usernick},
+		#{password},
+		#{salt},
+		#{email},
+		#{mobile},
+		#{syn},
+		#{created},
+		#{updated},
+		#{status}
+		)
+	</insert>
+
+	<insert id="insertUpdate" parameterType="User" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT IGNORE INTO
+		`auth_user`
+		(`userid`, `username`,
+		`usernick`,
+		`password`, `salt`, `email`, `mobile`,
+		`syn`,
+		`created`,
+		`updated`,
+		`status`)
+		VALUES (
+		#{userid},
+		#{username},
+		#{usernick},
+		#{password},
+		#{salt},
+		#{email},
+		#{mobile},
+		#{syn},
+		#{created},
+		#{updated},
+		#{status}
+		)
+		ON
+		DUPLICATE
+		KEY
+		UPDATE
+		usernick=VALUES(usernick),password=VALUES(password),salt=VALUES(salt),email=VALUES(email),mobile=VALUES(mobile),syn=VALUES(syn),updated=VALUES(updated),status=VALUES(status)
+	</insert>
+
+	<!-- 删除 -->
+	<delete id="delete">
+		DELETE FROM
+		`auth_user`
+		WHERE
+		userid=#{0}
+	</delete>
+
+	<select id="getByUsername" resultType="User">
+		SELECT * FROM
+		`auth_user`
+		WHERE
+		username=#{username}
+	</select>
+
+	<update id="update" parameterType="User">
+		UPDATE
+		`auth_user`
+		SET
+		`usernick`=#{usernick}, `password`=#{password},
+		`salt`=#{salt},`email`=#{email},
+		`mobile`=#{mobile},
+		`syn`=#{syn},
+		`updated`=#{updated},
+		`status`=#{status}
+		WHERE
+		`userid`=#{userid}
+	</update>
+
+	<select id="search" resultType="User">
+		SELECT ${query}
+	</select>
+</mapper> 
