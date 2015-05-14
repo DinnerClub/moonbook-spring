@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.mooncloud.moonbook.entity.user.User;
+import net.mooncloud.moonbook.utils.MD5Hash;
 
 public interface UserService
 {
@@ -35,7 +36,7 @@ public interface UserService
 	 * @param user
 	 * @return
 	 */
-	public User signin(User user);
+	public User signIn(User user);
 
 	/**
 	 * 注册
@@ -43,5 +44,9 @@ public interface UserService
 	 * @param user
 	 * @return
 	 */
-	public User signup(User user);
+	public User signUp(User user);
+
+	public User changeUsernick(User user);
+
+	public User changePassword(User user, MD5Hash newPassword);
 }

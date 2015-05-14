@@ -65,7 +65,10 @@ public class UserPaymentCategoryServiceImpl implements UserPaymentCategoryServic
 		String table = null;
 
 		fields.add("*");
-		table = "user_payment_category";
+		// table = "user_payment_category";
+		table = " (SELECT `userid`,`pid`, `pname`, `cid`, `cname`,`count`,`syn`,`created`,`updated`,`status` FROM `user_payment_category` WHERE userid=" + querys.get("userid")
+				+ " UNION (SELECT " + querys.get("userid") + " AS userid,`pid`, `pname`,`cid`, `cname`,`count`,`syn`,`created`,`updated`,`status` FROM `book_payment_category`"
+				+ " WHERE (`pid`,`cid`) NOT IN (SELECT `pid`,`cid` FROM `user_payment_category` WHERE userid=" + querys.get("userid") + "))) T ";
 		String facetQueryString = SqlFacetQueryString.facetQueryString(fields, null, null, table, querys, null, null, null, true);
 
 		Map<String, Object> queryMap = new HashMap<String, Object>(1);

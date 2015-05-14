@@ -8,6 +8,7 @@ import java.util.Random;
 
 import javax.naming.NamingException;
 
+import net.mooncloud.moonbook.Constants;
 import net.mooncloud.moonbook.entity.user.User;
 import net.mooncloud.moonbook.repository.user.UserDao;
 import net.mooncloud.moonbook.service.user.UserService;
@@ -80,7 +81,7 @@ public class UserServiceImpl implements UserService
 	@Override
 	public User encrypt(User user)
 	{
-		MD5Hash passwordMD5Hash = new MD5Hash(user.getPassword());// MD5Hash.digest(user.getPassword());
+		MD5Hash passwordMD5Hash = new MD5Hash(user.getSalt());// MD5Hash.digest(user.getPassword());
 
 		long min = 1000000000000000000L;
 		long max = 9223372036854775807L;
@@ -124,50 +125,168 @@ public class UserServiceImpl implements UserService
 	}
 
 	@Override
-	public User signup(User user)
+	public User signUp(User user)
 	{
 		try
 		{
-			User userServer = userDao.getByUsername(user);
-			if (userServer != null)
+			Map<String, Object> querys = new HashMap<String, Object>();
+			querys.put("username", user.getUsername());
+			List<User> users = search(querys);
+
+			if (users.size() > 0)
 			{
 				throw new NamingException(user.getUsername() + " already exist");
 			}
+
+			user.setStatus(Constants.USER_STATUS);
 			save(user);
+
+			user.setStatus(Constants.USER_STATUS_SIGUP_SUCCESS);
 		}
 		catch (NamingException e)
 		{
-			e.printStackTrace();
+			user.setStatus(Constants.USER_STATUS_SIGUP_USERNAME_ALREADY_EXIST);
+			// e.printStackTrace();
 		}
 		catch (Exception e)
 		{
+			user.setStatus(Constants.USER_STATUS_SIGUP_FAILED);
 			e.printStackTrace();
 		}
 		return user;
 	}
 
 	@Override
-	public User signin(User user)
+	public User signIn(User user)
 	{
-		User userServer = userDao.getByUsername(user);
-
-		if (userServer != null)
+		try
 		{
-			decrypt(userServer);
-			decrypt(user);
+			Map<String, Object> querys = new HashMap<String, Object>();
+			querys.put("username", user.getUsername());
+			List<User> users = search(querys);
 
-			if (userServer.getSalt().equals(user.getSalt()))
+			if (users.size() > 0)
 			{
-				user.setUserid(userServer.getUserid());
-				user.setUsername(userServer.getUsername());
-				user.setUsernick(userServer.getUsernick());
-				user.setEmail(userServer.getEmail());
-				user.setMobile(userServer.getMobile());
-				user.setSyn(userServer.getSyn());
-				user.setCreated(userServer.getCreated());
-				user.setUpdated(userServer.getUpdated());
-				user.setStatus(userServer.getStatus());
+				User userServer = users.get(0);
+				decrypt(userServer);
+				decrypt(user);
+
+				if (userServer.getSalt().equals(user.getSalt()))
+				{
+					user.setUserid(userServer.getUserid());
+					user.setUsername(userServer.getUsername());
+					user.setUsernick(userServer.getUsernick());
+					user.setEmail(userServer.getEmail());
+					user.setMobile(userServer.getMobile());
+					user.setSyn(userServer.getSyn());
+					user.setCreated(userServer.getCreated());
+					user.setUpdated(userServer.getUpdated());
+					user.setStatus(Constants.USER_STATUS_SIGIN_SUCCESS);
+				}
+				else
+				{
+					user.setStatus(Constants.USER_STATUS_SIGIN_PASSWORD_ERROR);
+				}
 			}
+			else
+			{
+				user.setStatus(Constants.USER_STATUS_SIGIN_USERNAME_NOT_EXIST);
+			}
+		}
+		catch (Exception e)
+		{
+			user.setStatus(Constants.USER_STATUS_SIGIN_FAILED);
+			e.printStackTrace();
+		}
+
+		user.setPassword(null);
+		user.setSalt(null);
+
+		return user;
+	}
+
+	@Override
+	public User changeUsernick(User user)
+	{
+		try
+		{
+			Map<String, Object> querys = new HashMap<String, Object>();
+			querys.put("username", user.getUserid());
+			List<User> users = search(querys);
+
+			User userServer = users.get(0);
+
+			decrypt(userServer);
+
+			userServer.setUsernick(user.getUsernick());
+			userServer.setSyn(user.getSyn());
+			userServer.setUpdated(user.getUpdated());
+
+			encrypt(userServer);
+
+			userDao.update(userServer);
+
+			userServer.setPassword(null);
+			userServer.setSalt(null);
+
+			userServer.setStatus(Constants.USER_STATUS_UPDATE_SUCCESS);
+			return userServer;
+		}
+		catch (Exception e)
+		{
+			user.setStatus(Constants.USER_STATUS_UPDATE_FAILED);
+			e.printStackTrace();
+		}
+
+		user.setPassword(null);
+		user.setSalt(null);
+
+		return user;
+	}
+
+	@Override
+	public User changePassword(User user, MD5Hash newPassword)
+	{
+		try
+		{
+			Map<String, Object> querys = new HashMap<String, Object>();
+			querys.put("username", user.getUsername());
+			List<User> users = search(querys);
+
+			if (users.size() > 0)
+			{
+				User userServer = users.get(0);
+				decrypt(userServer);
+				decrypt(user);
+
+				if (userServer.getSalt().equals(user.getSalt()))
+				{
+					userServer.setPassword(newPassword.toString());
+					userServer.setSalt(newPassword.toString());
+					userServer.setSyn(user.getSyn());
+					userServer.setUpdated(user.getUpdated());
+					encrypt(userServer);
+					userDao.update(userServer);
+
+					userServer.setStatus(Constants.USER_STATUS_UPDATE_SUCCESS);
+					userServer.setPassword(null);
+					userServer.setSalt(null);
+					return userServer;
+				}
+				else
+				{
+					user.setStatus(Constants.USER_STATUS_SIGIN_PASSWORD_ERROR);
+				}
+			}
+			else
+			{
+				user.setStatus(Constants.USER_STATUS_SIGIN_USERNAME_NOT_EXIST);
+			}
+		}
+		catch (Exception e)
+		{
+			user.setStatus(Constants.USER_STATUS_UPDATE_FAILED);
+			e.printStackTrace();
 		}
 
 		user.setPassword(null);

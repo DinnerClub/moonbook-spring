@@ -25,8 +25,8 @@ public class UserPaymentModeServiceImpl implements UserPaymentModeService
 		userPaymentModeDao.insertUpdate(userPaymentMode);
 		return userPaymentMode;
 		// return
-		// update(userPaymentModeDao.getCatName(userPaymentMode.getPid(),
-		// userPaymentMode.getCid()), userPaymentMode);
+		// update(userPaymentModeDao.getCatName(userPaymentMode.getmid(),
+		// userPaymentMode.getsid()), userPaymentMode);
 	}
 
 	@Override
@@ -66,6 +66,9 @@ public class UserPaymentModeServiceImpl implements UserPaymentModeService
 
 		fields.add("*");
 		table = "user_payment_mode";
+		table = " (SELECT `userid`,`mid`, `mname`, `sid`, `sname`,`count`,`syn`,`created`,`updated`,`status` FROM `user_payment_mode` WHERE userid=" + querys.get("userid")
+				+ " UNION (SELECT " + querys.get("userid") + " AS userid,`mid`, `mname`,`sid`, `sname`,`count`,`syn`,`created`,`updated`,`status` FROM `book_payment_mode`"
+				+ " WHERE (`mid`,`sid`) NOT IN (SELECT `mid`,`sid` FROM `user_payment_mode` WHERE userid=" + querys.get("userid") + "))) T ";
 		String facetQueryString = SqlFacetQueryString.facetQueryString(fields, null, null, table, querys, null, null, null, true);
 
 		Map<String, Object> queryMap = new HashMap<String, Object>(1);

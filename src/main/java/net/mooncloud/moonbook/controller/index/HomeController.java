@@ -1,4 +1,4 @@
-package net.mooncloud.moonbook;
+package net.mooncloud.moonbook.controller.index;
 
 import java.text.DateFormat;
 import java.util.Date;

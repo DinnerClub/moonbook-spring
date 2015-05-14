@@ -22,7 +22,7 @@ public class ChartDataQueryServiceImpl implements ChartDataQueryService
 	// static Connection connection = null;
 	// static Statement statement = null;
 
-	public List<ChartElement> userPaymentFacetQuery(List<String> fields, List<String> aggregates, String index, String table, Map<String, Object> querys,
+	public List<ChartElement> facetQuery(List<String> fields, List<String> aggregates, String index, String table, Map<String, Object> querys,
 			List<String> orderby, String limit, String offset)
 	{
 		String query = SqlFacetQueryString.facetQueryString(fields, aggregates, index, table, querys, orderby, limit, offset, true);
@@ -63,5 +63,15 @@ public class ChartDataQueryServiceImpl implements ChartDataQueryService
 		// }
 		//
 		// return null;
+	}
+
+	@Override
+	public List<ChartElement> userPaymentFacetQuery(List<String> fields, List<String> aggregates, String index, String table, Map<String, Object> querys,
+			List<String> orderby, String limit, String offset)
+	{
+		String query = SqlFacetQueryString.facetQueryString(fields, aggregates, index, table, querys, orderby, limit, offset, true);
+		Map<String, Object> queryMap = new HashMap<String, Object>(1);
+		queryMap.put("query", query);
+		return chartDataQueryDao.userPaymentFacetQuery(queryMap);
 	}
 }
